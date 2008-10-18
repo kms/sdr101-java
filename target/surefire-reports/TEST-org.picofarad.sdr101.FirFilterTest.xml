@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="1" time="0.172" errors="0" skipped="0" tests="3" name="org.picofarad.sdr101.FirFilterTest">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="env.SESSION_MANAGER" value="local/weber:/tmp/.ICE-unix/5248"/>
+    <property name="localRepository" value="/home/kms/.m2/repository"/>
+    <property name="env.VISUAL" value="/usr/bin/vim -X"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
+    <property name="env.LESSCHARSET" value="latin1"/>
+    <property name="env.GEM_HOME" value="/home/kms/bin/gems/lib/ruby/gems/1.8"/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.boot.class.path" value="/home/kms/bin/jdk1.6.0_07/jre/lib/resources.jar:/home/kms/bin/jdk1.6.0_07/jre/lib/rt.jar:/home/kms/bin/jdk1.6.0_07/jre/lib/sunrsasign.jar:/home/kms/bin/jdk1.6.0_07/jre/lib/jsse.jar:/home/kms/bin/jdk1.6.0_07/jre/lib/jce.jar:/home/kms/bin/jdk1.6.0_07/jre/lib/charsets.jar:/home/kms/bin/jdk1.6.0_07/jre/classes"/>
+    <property name="env.PWD" value="/home/kms/code/sdr101-java"/>
+    <property name="env.XDG_SESSION_COOKIE" value="3e04da97d21a259a4d5b1d0047ba9020-1218811951.799346-1410229772"/>
+    <property name="env.LANG" value="en_US.UTF-8"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.runtime.version" value="1.6.0_07-b06"/>
+    <property name="env.DISPLAY" value=":0.0"/>
+    <property name="user.name" value="kms"/>
+    <property name="env._" value="/home/kms/bin/apache-maven-2.0.9/bin//mvn"/>
+    <property name="env.USER" value="kms"/>
+    <property name="env.SHELL" value="/bin/zsh"/>
+    <property name="env.DESKTOP_SESSION" value="default"/>
+    <property name="env.XDG_DATA_DIRS" value="/usr/local/share/:/usr/share/:/usr/share/gdm/"/>
+    <property name="env.NLSPATH" value="/usr/dt/lib/nls/msg/%L/%N.cat"/>
+    <property name="env.PATH" value="/home/kms/bin/jdk1.6.0_07/bin/:/home/kms/bin/apache-maven-2.0.9/bin/:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/games:/usr/local/bin:/home/kms/bin:/home/kms/bin/gems/bin:/home/kms/bin/gems/lib/ruby/gems/1.8/bin/"/>
+    <property name="user.language" value="en"/>
+    <property name="sun.boot.library.path" value="/home/kms/bin/jdk1.6.0_07/jre/lib/i386"/>
+    <property name="classworlds.conf" value="/home/kms/bin/apache-maven-2.0.9/bin/m2.conf"/>
+    <property name="java.version" value="1.6.0_07"/>
+    <property name="user.timezone" value="Europe/Oslo"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="env.SSH_AGENT_PID" value="5329"/>
+    <property name="java.endorsed.dirs" value="/home/kms/bin/jdk1.6.0_07/jre/lib/endorsed"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="env.SHLVL" value="1"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="env.GDMSESSION" value="default"/>
+    <property name="user.country" value="US"/>
+    <property name="java.home" value="/home/kms/bin/jdk1.6.0_07/jre"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="env.LOGNAME" value="kms"/>
+    <property name="os.version" value="2.6.24-2-generic"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.version" value="10.0-b23"/>
+    <property name="env.JAVA_HOME" value="/home/kms/bin/jdk1.6.0_07/"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="env.TERM" value="xterm"/>
+    <property name="env.WINDOWPATH" value="7"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="env.TZ" value="Europe/Oslo"/>
+    <property name="user.home" value="/home/kms"/>
+    <property name="env.OLDPWD" value="/home/kms/code/sdr101-java"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="env.WINDOWID" value="33554464"/>
+    <property name="java.library.path" value="/home/kms/bin/jdk1.6.0_07/jre/lib/i386/client:/home/kms/bin/jdk1.6.0_07/jre/lib/i386:/home/kms/bin/jdk1.6.0_07/jre/../lib/i386:/usr/java/packages/lib/i386:/lib:/usr/lib"/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="env.GDM_XSERVER_LOCATION" value="local"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="maven.home" value="/home/kms/bin/apache-maven-2.0.9"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.class.path" value="/home/kms/bin/apache-maven-2.0.9/boot/classworlds-1.1.jar"/>
+    <property name="env.CVS_RSH" value="ssh"/>
+    <property name="env.XFILESEARCHPATH" value="/usr/dt/app-defaults/%L/Dt"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="env.HOME" value="/home/kms"/>
+    <property name="surefire.test.class.path" value="/home/kms/code/sdr101-java/target/test-classes:/home/kms/code/sdr101-java/target/classes:/home/kms/.m2/repository/junit/junit/4.4/junit-4.4.jar:"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="env.LD_LIBRARY_PATH" value="/home/kms/bin/jdk1.6.0_07/jre/lib/i386/client:/home/kms/bin/jdk1.6.0_07/jre/lib/i386:/home/kms/bin/jdk1.6.0_07/jre/../lib/i386"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="env.SSH_AUTH_SOCK" value="/tmp/ssh-OjPPXT5248/agent.5248"/>
+    <property name="env.RUBYLIB" value="/home/kms/bin/gems/lib:/home/kms/bin/gems/lib/site_ruby/1.8"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="os.arch" value="i386"/>
+    <property name="java.ext.dirs" value="/home/kms/bin/jdk1.6.0_07/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="user.dir" value="/home/kms/code/sdr101-java"/>
+    <property name="env.XAUTHORITY" value="/home/kms/.Xauthority"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"/>
+    <property name="env.RSYNC_RSH" value="ssh"/>
+    <property name="env.COLORTERM" value="Terminal"/>
+    <property name="basedir" value="/home/kms/code/sdr101-java"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.6"/>
+  </properties>
+  <testcase time="0.036" classname="org.picofarad.sdr101.FirFilterTest" name="testCreate"/>
+  <testcase time="0.003" classname="org.picofarad.sdr101.FirFilterTest" name="testInOut"/>
+  <testcase time="0.01" classname="org.picofarad.sdr101.FirFilterTest" name="testImpulseResponse">
+    <failure message="expected:&lt;0.1&gt; but was:&lt;0.0&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;0.1&gt; but was:&lt;0.0&gt;
+	at org.junit.Assert.fail(Assert.java:74)
+	at org.junit.Assert.failNotEquals(Assert.java:448)
+	at org.junit.Assert.assertEquals(Assert.java:315)
+	at org.junit.Assert.assertEquals(Assert.java:346)
+	at org.picofarad.sdr101.FirFilterTest.testImpulseResponse(FirFilterTest.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.internal.runners.TestMethod.invoke(TestMethod.java:59)
+	at org.junit.internal.runners.MethodRoadie.runTestMethod(MethodRoadie.java:98)
+	at org.junit.internal.runners.MethodRoadie$2.run(MethodRoadie.java:79)
+	at org.junit.internal.runners.MethodRoadie.runBeforesThenTestThenAfters(MethodRoadie.java:87)
+	at org.junit.internal.runners.MethodRoadie.runTest(MethodRoadie.java:77)
+	at org.junit.internal.runners.MethodRoadie.run(MethodRoadie.java:42)
+	at org.junit.internal.runners.JUnit4ClassRunner.invokeTestMethod(JUnit4ClassRunner.java:88)
+	at org.junit.internal.runners.JUnit4ClassRunner.runMethods(JUnit4ClassRunner.java:51)
+	at org.junit.internal.runners.JUnit4ClassRunner$1.run(JUnit4ClassRunner.java:44)
+	at org.junit.internal.runners.ClassRoadie.runUnprotected(ClassRoadie.java:27)
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:37)
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:42)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:338)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:997)
+</failure>
+  </testcase>
+</testsuite>

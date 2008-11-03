@@ -3,40 +3,38 @@ package org.picofarad.sdr101;
 import java.util.List;
 import java.util.ArrayList;
 
-public class FirFilter {
+public class FirFilter implements SignalBlock {
     private List<Double> coefficients;
     private List<Double> buffer;
+    private SignalBlock source;
 
     public FirFilter(List<Double> f) {
 	buffer = new ArrayList<Double>();
 	coefficients = f;
+	source = new NullSource();
+	fillBuffer();
     }
 
-    public void padBuffer() {
-	while (buffer.size() < coefficients.size()) {
-	    buffer.add(0.0);
+    public void setSource(SignalBlock sb) {
+	source = sb;
+    }
+
+    public void fillBuffer() {
+        while (buffer.size() < coefficients.size()) {
+	    buffer.add(source.out());
 	}
-    }
-
-    public void in(double d) {
-	buffer.add(d);
     }
 
     public double out() {
 	double d = 0.0;
 
-	padBuffer();
+	buffer.add(0, source.out());
+	buffer.remove(buffer.size() - 1);
 
 	for (int i = 0; i < coefficients.size(); i++) {
 	    d += buffer.get(i) * coefficients.get(i);
 	}
 
-	buffer.remove(0);
-
 	return d;
-    }
-
-    public int bufferSize() {
-	return buffer.size();
     }
 }

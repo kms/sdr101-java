@@ -5,7 +5,7 @@ import org.junit.Assert;
 
 public class FilterFactoryTest {
     @Test
-    public void testLowPass1() { 
+    public void testLowPass3kHz() { 
 	Assert.fail();
     }
 }

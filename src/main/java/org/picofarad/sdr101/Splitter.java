@@ -1,36 +1,48 @@
 package org.picofarad.sdr101;
 
-public class Splitter implements SignalBlock {
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Deque;
+import java.util.ArrayDeque;
+
+public class Splitter {
     private SignalBlock source;
-    private Splitter splitter;
-    private double lastSample;
+    private Map<SplitterOutput, Deque<Double>> outputs;
 
     public Splitter(SignalBlock s) {
 	source = s;
-    }
-
-    public Splitter(Splitter s) {
-	splitter = s;
+	outputs = new HashMap<SplitterOutput, Deque<Double>>();
     }
 
     public void setSource(SignalBlock sb) {
 	source = sb;
     }
 
-    public double getLastSample() {
-	return lastSample;
+    public SplitterOutput createOutput() {
+	SplitterOutput so = new SplitterOutput(this);
+	outputs.put(so, new ArrayDeque<Double>());
+
+	return so;
     }
 
-    public Splitter newOutput() {
-	return new Splitter(this);
+    private void fillAllBuffers() {
+	double sample = source.out();
+
+	for (Deque<Double> buffer : outputs.values()) {
+	    buffer.offer(sample);
+	}
     }
 
-    public double out() {
-	if (splitter != null) {
-	    return splitter.getLastSample();
+    public double out(SplitterOutput so) {
+	Deque<Double> buffer = outputs.get(so);
+	if (buffer == null) {
+	    return 0.0;
 	} else {
-	    lastSample = source.out();
-	    return lastSample;
+	    if (buffer.size() == 0) {
+		fillAllBuffers();
+	    }
+
+	    return buffer.remove();
 	}
     }
 }

@@ -23,7 +23,7 @@ public class FirFilterTest {
 
 	FirFilter ff = new FirFilter(c);
 
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 44100; i++) {
 	    Assert.assertEquals(0.0, ff.out(), 0.0001);
 	}
     }

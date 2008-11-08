@@ -8,14 +8,6 @@ import org.junit.Assert;
 
 public class FirFilterTest {
     @Test
-    public void testCreate() {
-	List<Double> c = new ArrayList();
-	c.add(0.0);
-
-	FirFilter ff = new FirFilter(c);
-    }
-
-    @Test
     public void testOut() {
 	List<Double> c = new ArrayList();
 	c.add(0.0);

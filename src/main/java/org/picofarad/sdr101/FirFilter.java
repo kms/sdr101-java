@@ -32,8 +32,9 @@ public class FirFilter implements SignalBlock {
 	buffer.addFirst(source.out());
 	buffer.removeLast();
 
-	for (int i = 0; i < coefficients.size(); i++) {
-	    d += buffer.get(i) * coefficients.get(i);
+	int i = 0;
+	for (Double b : buffer) {
+	    d += b * coefficients.get(i++);
 	}
 
 	return d;

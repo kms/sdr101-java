@@ -1,4 +1,4 @@
-package org.picofarad.sdr101;
+package org.picofarad.sdr101.blocks;
 
 public class ImpulseSource implements SignalBlock {
     private boolean first;

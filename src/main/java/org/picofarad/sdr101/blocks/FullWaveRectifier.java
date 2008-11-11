@@ -1,4 +1,4 @@
-package org.picofarad.sdr101;
+package org.picofarad.sdr101.blocks;
 
 public class FullWaveRectifier implements SignalBlock {
     private SignalBlock source;

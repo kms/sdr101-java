@@ -1,10 +1,10 @@
-package org.picofarad.sdr101;
+package org.picofarad.sdr101.blocks;
 
-public class Mixer implements SignalBlock {
+public class Summer implements SignalBlock {
     private SignalBlock sourceA;
     private SignalBlock sourceB;
 
-    public Mixer(SignalBlock a, SignalBlock b) {
+    public Summer(SignalBlock a, SignalBlock b) {
 	sourceA = a;
 	sourceB = b;
     }
@@ -18,6 +18,6 @@ public class Mixer implements SignalBlock {
     }
 
     public double out() {
-	return sourceA.out() * sourceB.out();
+	return sourceA.out() + sourceB.out();
     }
 }

@@ -1,4 +1,4 @@
-package org.picofarad.sdr101;
+package org.picofarad.sdr101.blocks;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -23,4 +23,24 @@ public class SummerTest {
 	Assert.assertEquals(1.0, s.out(), 0.0001);
 	Assert.assertEquals(3.0, s.out(), 0.0001);
     }
+
+    @Test
+    public void testSummerInverted() { 
+	BufferSource a = new BufferSource();
+	BufferSource b = new BufferSource();
+
+	Summer s = new Summer(a, b, true);
+
+	a.buffer(0.0);
+	a.buffer(0.5);
+	a.buffer(1.0);
+
+	b.buffer(1.0);
+	b.buffer(0.5);
+	b.buffer(2.0);
+
+	Assert.assertEquals(-1.0, s.out(), 0.0001);
+	Assert.assertEquals(0.0, s.out(), 0.0001);
+	Assert.assertEquals(-1.0, s.out(), 0.0001);
+    }
 }

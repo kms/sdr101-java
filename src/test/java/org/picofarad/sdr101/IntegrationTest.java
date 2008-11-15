@@ -46,7 +46,43 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testGenerateCarrier() {
+    public void testGenerateCarrierUSBInvertedSummer() {
+	int fs = 44100;
+	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 100, 0);
+	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 100, 90);
+	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
+	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
+	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 1100, 270);
+
+	Mixer mI = new Mixer(i, loI);
+	Mixer mQ = new Mixer(q, loQ);
+	Summer s = new Summer(mI, mQ, true);
+
+	for (int j = 0; j < fs * 2; j++) {
+	    Assert.assertEquals(desired.out(), s.out(), 0.0001);
+	}
+    }
+
+    @Test
+    public void testGenerateCarrierUSBSwappedLOs() {
+	int fs = 44100;
+	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 100, 0);
+	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 100, 90);
+	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
+	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
+	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 1100, 0);
+
+	Mixer mI = new Mixer(i, loQ);
+	Mixer mQ = new Mixer(q, loI);
+	Summer s = new Summer(mI, mQ);
+
+	for (int j = 0; j < fs * 2; j++) {
+	    Assert.assertEquals(desired.out(), s.out(), 0.0001);
+	}
+    }
+
+    @Test
+    public void testGenerateCarrierLSB() {
 	int fs = 44100;
 	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 100, 0);
 	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 100, 90);

@@ -1,21 +1,21 @@
 package org.picofarad.sdr101.blocks;
 
 
-public class LocalOscillatorSource implements SignalBlock {
+public class SineSource implements SignalBlock {
     private int sampleRate;
     private double frequency;
     private double phaseOffset;
     private int sampleNumber;
 
-    public static LocalOscillatorSource factory(int sr, double f, double p) {
-	return new LocalOscillatorSource(sr, f, p);
+    public static SineSource factory(int sr, double f, double p) {
+	return new SineSource(sr, f, p);
     }
 
-    public static LocalOscillatorSource factory(int sr, double f) {
-	return new LocalOscillatorSource(sr, f, 0.0);
+    public static SineSource factory(int sr, double f) {
+	return new SineSource(sr, f, 0.0);
     }
 
-    private LocalOscillatorSource(int sr, double f, double p) {
+    private SineSource(int sr, double f, double p) {
 	sampleRate = sr;
 	frequency = f;
 	phaseOffset = p;

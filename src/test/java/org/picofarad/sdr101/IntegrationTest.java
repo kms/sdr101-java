@@ -5,7 +5,7 @@ import org.junit.Assert;
 
 import org.picofarad.sdr101.blocks.FilterFactory;
 import org.picofarad.sdr101.blocks.FirFilter;
-import org.picofarad.sdr101.blocks.LocalOscillatorSource;
+import org.picofarad.sdr101.blocks.SineSource;
 import org.picofarad.sdr101.blocks.Splitter;
 import org.picofarad.sdr101.blocks.SignalBlock;
 import org.picofarad.sdr101.blocks.Summer;
@@ -16,7 +16,7 @@ public class IntegrationTest {
     public void testLPFilterStopBand() throws Exception {
 	int fs = 44100;
 	FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
-	ff.setSource(LocalOscillatorSource.factory(fs, 20000));
+	ff.setSource(SineSource.factory(fs, 20000));
 
 	for (int i = 0; i < fs * 2; i++) {
 	    Assert.assertEquals(0.0, ff.out(), 0.01);
@@ -26,7 +26,7 @@ public class IntegrationTest {
     @Test
     public void testLPFilterPassBand() throws Exception {
 	int fs = 44100;
-	LocalOscillatorSource sineSource = LocalOscillatorSource.factory(fs, 100);
+	SineSource sineSource = SineSource.factory(fs, 100);
 	Splitter s = new Splitter(sineSource);
 	SignalBlock sinePristine = s.createOutput();
 
@@ -50,11 +50,11 @@ public class IntegrationTest {
     @Test
     public void testGenerateCarrierUSBInvertedSummer() {
 	int fs = 44100;
-	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 100, 0);
-	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 100, 90);
-	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
-	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
-	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 1100, 270);
+	SineSource i = SineSource.factory(fs, 100, 0);
+	SineSource q = SineSource.factory(fs, 100, 90);
+	SineSource loI = SineSource.factory(fs, 1000, 0);
+	SineSource loQ = SineSource.factory(fs, 1000, 90);
+	SineSource desired = SineSource.factory(fs, 1100, 270);
 
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);
@@ -68,11 +68,11 @@ public class IntegrationTest {
     @Test
     public void testGenerateCarrierUSBSwappedLOs() {
 	int fs = 44100;
-	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 100, 0);
-	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 100, 90);
-	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
-	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
-	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 1100, 0);
+	SineSource i = SineSource.factory(fs, 100, 0);
+	SineSource q = SineSource.factory(fs, 100, 90);
+	SineSource loI = SineSource.factory(fs, 1000, 0);
+	SineSource loQ = SineSource.factory(fs, 1000, 90);
+	SineSource desired = SineSource.factory(fs, 1100, 0);
 
 	Mixer mI = new Mixer(i, loQ);
 	Mixer mQ = new Mixer(q, loI);
@@ -86,11 +86,11 @@ public class IntegrationTest {
     @Test
     public void testGenerateCarrierLSB() {
 	int fs = 44100;
-	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 100, 0);
-	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 100, 90);
-	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
-	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
-	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 900, 90);
+	SineSource i = SineSource.factory(fs, 100, 0);
+	SineSource q = SineSource.factory(fs, 100, 90);
+	SineSource loI = SineSource.factory(fs, 1000, 0);
+	SineSource loQ = SineSource.factory(fs, 1000, 90);
+	SineSource desired = SineSource.factory(fs, 900, 90);
 
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);
@@ -104,11 +104,11 @@ public class IntegrationTest {
     @Test
     public void testDemodulateUSB() throws Exception {
 	int fs = 44100;
-	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 1100, 0);
-	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 1100, 90);
-	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
-	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
-	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 100, 90);
+	SineSource i = SineSource.factory(fs, 1100, 0);
+	SineSource q = SineSource.factory(fs, 1100, 90);
+	SineSource loI = SineSource.factory(fs, 1000, 0);
+	SineSource loQ = SineSource.factory(fs, 1000, 90);
+	SineSource desired = SineSource.factory(fs, 100, 90);
 
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);

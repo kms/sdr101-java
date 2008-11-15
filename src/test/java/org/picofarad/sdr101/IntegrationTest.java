@@ -8,6 +8,8 @@ import org.picofarad.sdr101.blocks.FirFilter;
 import org.picofarad.sdr101.blocks.LocalOscillatorSource;
 import org.picofarad.sdr101.blocks.Splitter;
 import org.picofarad.sdr101.blocks.SignalBlock;
+import org.picofarad.sdr101.blocks.Summer;
+import org.picofarad.sdr101.blocks.Mixer;
 
 public class IntegrationTest {
     @Test
@@ -40,6 +42,24 @@ public class IntegrationTest {
 
 	for (int i = 0; i < 44100 * 2; i++) {
 	    Assert.assertEquals(sinePristine.out(), ff.out(), 0.05);
+	}
+    }
+
+    @Test
+    public void testGenerateCarrier() {
+	int fs = 44100;
+	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 100, 0);
+	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 100, 90);
+	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
+	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
+	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 900, 90);
+
+	Mixer mI = new Mixer(i, loI);
+	Mixer mQ = new Mixer(q, loQ);
+	Summer s = new Summer(mI, mQ);
+
+	for (int j = 0; j < fs * 2; j++) {
+	    Assert.assertEquals(desired.out(), s.out(), 0.0001);
 	}
     }
 }

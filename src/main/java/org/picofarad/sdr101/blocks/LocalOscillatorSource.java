@@ -24,7 +24,7 @@ public class LocalOscillatorSource implements SignalBlock {
     public double out() {
 	double r;
 	double position = (double) sampleNumber / sampleRate;
-	double offset = phaseOffset / 360;
+	double offset = (phaseOffset / 360) / frequency;
 
 	r = Math.sin(2 * Math.PI * (position + offset) * frequency);
 

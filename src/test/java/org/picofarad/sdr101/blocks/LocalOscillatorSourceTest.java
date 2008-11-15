@@ -5,6 +5,20 @@ import org.junit.Assert;
 
 public class LocalOscillatorSourceTest {
     @Test
+    public void testOutAt2Hz() {
+	LocalOscillatorSource lo = LocalOscillatorSource.factory(8, 2);
+
+	Assert.assertEquals(0.0, lo.out(), 0.0001);
+	Assert.assertEquals(1.0, lo.out(), 0.0001);
+	Assert.assertEquals(0.0, lo.out(), 0.0001);
+	Assert.assertEquals(-1.0, lo.out(), 0.0001);
+	Assert.assertEquals(0.0, lo.out(), 0.0001);
+	Assert.assertEquals(1.0, lo.out(), 0.0001);
+	Assert.assertEquals(0.0, lo.out(), 0.0001);
+	Assert.assertEquals(-1.0, lo.out(), 0.0001);
+    }
+
+    @Test
     public void testOutAtOneFourth() {
 	LocalOscillatorSource lo = LocalOscillatorSource.factory(4, 1);
 
@@ -42,12 +56,30 @@ public class LocalOscillatorSourceTest {
 
     @Test
     public void testOut90PhaseOffset() {
-	LocalOscillatorSource lo = LocalOscillatorSource.factory(4, 1, 90);
+	LocalOscillatorSource lo = LocalOscillatorSource.factory(8, 1, 90);
 
-	Assert.assertEquals(1.0, lo.out(), 0.0001);
-	Assert.assertEquals(0.0, lo.out(), 0.0001);
-	Assert.assertEquals(-1.0, lo.out(), 0.0001);
-	Assert.assertEquals(0.0, lo.out(), 0.0001);
+	Assert.assertEquals(1.0, lo.out(), 0.001);
+	Assert.assertEquals(0.707, lo.out(), 0.001);
+	Assert.assertEquals(0.0, lo.out(), 0.001);
+	Assert.assertEquals(-0.707, lo.out(), 0.001);
+	Assert.assertEquals(-1.0, lo.out(), 0.001);
+	Assert.assertEquals(-0.707, lo.out(), 0.001);
+	Assert.assertEquals(0.0, lo.out(), 0.001);
+	Assert.assertEquals(0.707, lo.out(), 0.001); 
+    }
+
+    @Test
+    public void testOut90PhaseOffsetAt2Hz() {
+	LocalOscillatorSource lo = LocalOscillatorSource.factory(8, 2, 90);
+
+	Assert.assertEquals(1.0, lo.out(), 0.001);
+	Assert.assertEquals(0.0, lo.out(), 0.001);
+	Assert.assertEquals(-1.0, lo.out(), 0.001);
+	Assert.assertEquals(0.0, lo.out(), 0.001);
+	Assert.assertEquals(1.0, lo.out(), 0.001);
+	Assert.assertEquals(0.0, lo.out(), 0.001);
+	Assert.assertEquals(-1.0, lo.out(), 0.001);
+	Assert.assertEquals(0.0, lo.out(), 0.001);
     }
 
     @Test
@@ -69,5 +101,4 @@ public class LocalOscillatorSourceTest {
 	Assert.assertEquals(1.0, lo.out(), 0.0001);
 	Assert.assertEquals(0.0, lo.out(), 0.0001);
     }
-
 }

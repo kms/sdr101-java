@@ -14,17 +14,19 @@ import org.picofarad.sdr101.blocks.Mixer;
 public class IntegrationTest {
     @Test
     public void testLPFilterStopBand() throws Exception {
+	int fs = 44100;
 	FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
-	ff.setSource(LocalOscillatorSource.factory(44100, 20000));
+	ff.setSource(LocalOscillatorSource.factory(fs, 20000));
 
-	for (int i = 0; i < 44100 * 2; i++) {
+	for (int i = 0; i < fs * 2; i++) {
 	    Assert.assertEquals(0.0, ff.out(), 0.01);
 	}
     }
 
     @Test
     public void testLPFilterPassBand() throws Exception {
-	LocalOscillatorSource sineSource = LocalOscillatorSource.factory(44100, 100);
+	int fs = 44100;
+	LocalOscillatorSource sineSource = LocalOscillatorSource.factory(fs, 100);
 	Splitter s = new Splitter(sineSource);
 	SignalBlock sinePristine = s.createOutput();
 
@@ -40,7 +42,7 @@ public class IntegrationTest {
 	    ff.out();
 	}
 
-	for (int i = 0; i < 44100 * 2; i++) {
+	for (int i = 0; i < fs * 2; i++) {
 	    Assert.assertEquals(sinePristine.out(), ff.out(), 0.05);
 	}
     }
@@ -96,6 +98,35 @@ public class IntegrationTest {
 
 	for (int j = 0; j < fs * 2; j++) {
 	    Assert.assertEquals(desired.out(), s.out(), 0.0001);
+	}
+    }
+
+    @Test
+    public void testDemodulateUSB() throws Exception {
+	int fs = 44100;
+	LocalOscillatorSource i = LocalOscillatorSource.factory(fs, 1100, 0);
+	LocalOscillatorSource q = LocalOscillatorSource.factory(fs, 1100, 90);
+	LocalOscillatorSource loI = LocalOscillatorSource.factory(fs, 1000, 0);
+	LocalOscillatorSource loQ = LocalOscillatorSource.factory(fs, 1000, 90);
+	LocalOscillatorSource desired = LocalOscillatorSource.factory(fs, 100, 90);
+
+	Mixer mI = new Mixer(i, loI);
+	Mixer mQ = new Mixer(q, loQ);
+	Summer s = new Summer(mI, mQ);
+	FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
+	ff.setSource(s);
+
+	for (int j = 0; j < ff.taps(); j++) {
+	    desired.out();
+	    ff.out();
+	}
+
+	for (int j = 0; j < ff.taps() / 2; j++) {
+	    ff.out();
+	}
+
+	for (int j = 0; j < fs * 2; j++) {
+	    Assert.assertEquals(desired.out(), ff.out(), 0.01);
 	}
     }
 }

@@ -2,6 +2,6 @@ package org.picofarad.sdr101.blocks;
 
 import java.util.List;
 
-interface SignalBlock {
+public interface SignalBlock {
     double out();
 }

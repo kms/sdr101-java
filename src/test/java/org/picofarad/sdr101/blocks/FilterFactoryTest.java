@@ -1,11 +1,51 @@
 package org.picofarad.sdr101.blocks;
 
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.Assert;
 
 public class FilterFactoryTest {
     @Test
-    public void testLowPass3kHz() { 
-	//Assert.fail();
+    public void testLoadCoefficientsFromFile() throws IOException {
+	List<Double> c = FilterFactory.loadCoefficientsFromFile("/firTest.txt");
+	Assert.assertNotNull(c);
+	Assert.assertEquals(4, c.size());
+	Assert.assertEquals(1.0, c.get(0), 0.0001);
+	Assert.assertEquals(2.0, c.get(1), 0.0001);
+	Assert.assertEquals(0.12345, c.get(2), 0.0001);
+	Assert.assertEquals(-0.5, c.get(3), 0.0001);
+    }
+
+    @Test
+    public void testLoadFirFromFileBadData() {
+	try {
+	    SignalBlock sb = FilterFactory.loadFirFromFile("/firTestBadData.txt");
+	    Assert.fail("Did not throw exception.");
+	} catch (IOException e) {
+	}
+    }
+
+    @Test
+    public void testLoadFirFromFileBadFilename() throws IOException {
+	try {
+	    SignalBlock sb = FilterFactory.loadFirFromFile("/thisFileDoesNotExist.txt");
+	    Assert.fail("Did not throw exception.");
+	} catch (FileNotFoundException e) {
+	}
+    }
+
+    @Test
+    public void testLoadFirFromFile() throws IOException {
+	FirFilter ff = FilterFactory.loadFirFromFile("/firTest.txt");
+	Assert.assertNotNull(ff);
+
+	ff.setSource(new ImpulseSource());
+	Assert.assertEquals(1.0, ff.out(), 0.0001);
+	Assert.assertEquals(2.0, ff.out(), 0.0001);
+	Assert.assertEquals(0.12345, ff.out(), 0.0001);
+	Assert.assertEquals(-0.5, ff.out(), 0.0001);
     }
 }

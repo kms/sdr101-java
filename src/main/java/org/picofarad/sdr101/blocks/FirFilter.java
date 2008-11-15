@@ -28,6 +28,10 @@ public class FirFilter implements SignalBlock {
 	}
     }
 
+    public int taps() {
+	return coefficients.size();
+    }
+
     public double out() {
 	double d = 0.0;
 

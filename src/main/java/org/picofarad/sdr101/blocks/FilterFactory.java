@@ -2,12 +2,9 @@ package org.picofarad.sdr101.blocks;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.util.List;
 import java.util.ArrayList;
 

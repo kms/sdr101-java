@@ -8,6 +8,20 @@ import org.junit.Assert;
 
 public class FirFilterTest {
     @Test
+    public void testTaps() {
+	List<Double> c = new ArrayList();
+	c.add(0.0);
+	c.add(1.0);
+
+	FirFilter ff = new FirFilter(c);
+	Assert.assertEquals(2, ff.taps());
+
+	c.add(1.0);
+	ff = new FirFilter(c);
+	Assert.assertEquals(3, ff.taps());
+    }
+
+    @Test
     public void testOut() {
 	List<Double> c = new ArrayList();
 	c.add(0.0);

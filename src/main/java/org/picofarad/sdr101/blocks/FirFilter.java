@@ -7,13 +7,13 @@ import java.util.Deque;
 import java.util.ArrayDeque;
 
 public class FirFilter implements SignalBlock {
-    private List<Double> coefficients;
+    private Double[] coefficients;
     private Deque<Double> buffer;
     private SignalBlock source;
 
     public FirFilter(List<Double> f) {
 	buffer = new ArrayDeque<Double>();
-	coefficients = f;
+	coefficients = f.toArray(new Double[0]);
 	source = new NullSource();
 	fillBuffer();
     }
@@ -23,13 +23,13 @@ public class FirFilter implements SignalBlock {
     }
 
     public void fillBuffer() {
-        while (buffer.size() < coefficients.size()) {
+        while (buffer.size() < taps()) {
 	    buffer.add(source.out());
 	}
     }
 
     public int taps() {
-	return coefficients.size();
+	return coefficients.length;
     }
 
     public double out() {
@@ -40,7 +40,7 @@ public class FirFilter implements SignalBlock {
 
 	int i = 0;
 	for (Double b : buffer) {
-	    d += b * coefficients.get(i);
+	    d += b * coefficients[i];
 	    i++;
 	}
 

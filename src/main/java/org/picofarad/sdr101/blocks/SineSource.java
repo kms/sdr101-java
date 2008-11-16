@@ -6,15 +6,13 @@ public class SineSource implements SignalBlock {
     private double phaseOffset;
     private int sampleNumber;
 
-    public static SineSource factory(int sr, double f, double p) {
-	return new SineSource(sr, f, p);
+    public SineSource(int sr, double f) {
+	sampleRate = sr;
+	frequency = f;
+	phaseOffset = 0.0;
     }
 
-    public static SineSource factory(int sr, double f) {
-	return new SineSource(sr, f, 0.0);
-    }
-
-    private SineSource(int sr, double f, double p) {
+    public SineSource(int sr, double f, double p) {
 	sampleRate = sr;
 	frequency = f;
 	phaseOffset = p;

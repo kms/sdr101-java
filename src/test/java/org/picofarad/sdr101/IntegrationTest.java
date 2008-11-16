@@ -17,7 +17,7 @@ public class IntegrationTest {
     public void testLPFilterStopBand() throws Exception {
 	int fs = 44100;
 	FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
-	ff.setInput(SineSource.factory(fs, 20000));
+	ff.setInput(new SineSource(fs, 20000));
 
 	for (int i = 0; i < fs * 2; i++) {
 	    Assert.assertEquals(0.0, ff.output(), 0.01);
@@ -27,7 +27,7 @@ public class IntegrationTest {
     @Test
     public void testLPFilterPassBand() throws Exception {
 	int fs = 44100;
-	SineSource sineSource = SineSource.factory(fs, 100);
+	SineSource sineSource = new SineSource(fs, 100);
 	Splitter s = new Splitter(sineSource);
 	SignalBlock sinePristine = s.createOutput();
 
@@ -51,11 +51,11 @@ public class IntegrationTest {
     @Test
     public void testGenerateCarrierUSBInvertedSummer() {
 	int fs = 44100;
-	SineSource i = SineSource.factory(fs, 100, 0);
-	SineSource q = SineSource.factory(fs, 100, 90);
-	SineSource loI = SineSource.factory(fs, 1000, 0);
-	SineSource loQ = SineSource.factory(fs, 1000, 90);
-	SineSource desired = SineSource.factory(fs, 1100, 270);
+	SineSource i = new SineSource(fs, 100, 0);
+	SineSource q = new SineSource(fs, 100, 90);
+	SineSource loI = new SineSource(fs, 1000, 0);
+	SineSource loQ = new SineSource(fs, 1000, 90);
+	SineSource desired = new SineSource(fs, 1100, 270);
 
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);
@@ -69,11 +69,11 @@ public class IntegrationTest {
     @Test
     public void testGenerateCarrierUSBSwappedLOs() {
 	int fs = 44100;
-	SineSource i = SineSource.factory(fs, 100, 0);
-	SineSource q = SineSource.factory(fs, 100, 90);
-	SineSource loI = SineSource.factory(fs, 1000, 0);
-	SineSource loQ = SineSource.factory(fs, 1000, 90);
-	SineSource desired = SineSource.factory(fs, 1100, 0);
+	SineSource i = new SineSource(fs, 100, 0);
+	SineSource q = new SineSource(fs, 100, 90);
+	SineSource loI = new SineSource(fs, 1000, 0);
+	SineSource loQ = new SineSource(fs, 1000, 90);
+	SineSource desired = new SineSource(fs, 1100, 0);
 
 	Mixer mI = new Mixer(i, loQ);
 	Mixer mQ = new Mixer(q, loI);
@@ -87,11 +87,11 @@ public class IntegrationTest {
     @Test
     public void testGenerateCarrierLSB() {
 	int fs = 44100;
-	SineSource i = SineSource.factory(fs, 100, 0);
-	SineSource q = SineSource.factory(fs, 100, 90);
-	SineSource loI = SineSource.factory(fs, 1000, 0);
-	SineSource loQ = SineSource.factory(fs, 1000, 90);
-	SineSource desired = SineSource.factory(fs, 900, 90);
+	SineSource i = new SineSource(fs, 100, 0);
+	SineSource q = new SineSource(fs, 100, 90);
+	SineSource loI = new SineSource(fs, 1000, 0);
+	SineSource loQ = new SineSource(fs, 1000, 90);
+	SineSource desired = new SineSource(fs, 900, 90);
 
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);
@@ -105,11 +105,11 @@ public class IntegrationTest {
     @Test
     public void testDemodulateUSB() throws Exception {
 	int fs = 44100;
-	SineSource i = SineSource.factory(fs, 1100, 0);
-	SineSource q = SineSource.factory(fs, 1100, 90);
-	SineSource loI = SineSource.factory(fs, 1000, 0);
-	SineSource loQ = SineSource.factory(fs, 1000, 90);
-	SineSource desired = SineSource.factory(fs, 100, 90);
+	SineSource i = new SineSource(fs, 1100, 0);
+	SineSource q = new SineSource(fs, 1100, 90);
+	SineSource loI = new SineSource(fs, 1000, 0);
+	SineSource loQ = new SineSource(fs, 1000, 90);
+	SineSource desired = new SineSource(fs, 100, 90);
 
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);

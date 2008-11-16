@@ -39,7 +39,7 @@ public class CumulativeAverageFilterTest {
 
     @Test
     public void testCumulativeAverageFilterSinus() {
-	SineSource lo = SineSource.factory(44100, 1000);
+	SineSource lo = new SineSource(44100, 1000);
 	CumulativeAverageFilter maf = new CumulativeAverageFilter(lo, 44100);
 
 	for (int i = 0; i < 44100; i++) {

@@ -12,11 +12,11 @@ import org.picofarad.sdr101.blocks.Mixer;
 public class Sdr101performance {
     public static void main(String args[]) throws Exception {
 	int fs = 44100;
-	SineSource i = SineSource.factory(fs, 1100, 0);
-	SineSource q = SineSource.factory(fs, 1100, 90);
-	SineSource loI = SineSource.factory(fs, 1000, 0);
-	SineSource loQ = SineSource.factory(fs, 1000, 90);
-	SineSource desired = SineSource.factory(fs, 100, 90);
+	SineSource i = new SineSource(fs, 1100, 0);
+	SineSource q = new SineSource(fs, 1100, 90);
+	SineSource loI = new SineSource(fs, 1000, 0);
+	SineSource loQ = new SineSource(fs, 1000, 90);
+	SineSource desired = new SineSource(fs, 100, 90);
 
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);

@@ -6,7 +6,7 @@ import org.junit.Assert;
 public class EnvelopeDetectorTest {
     @Test
     public void testEnvelopeDetector() {
-	SineSource lo = SineSource.factory(44100, 1000);
+	SineSource lo = new SineSource(44100, 1000);
 	EnvelopeDetector ed = new EnvelopeDetector(lo, 44100);
 
 	for (int i = 0; i < 44100; i++) {

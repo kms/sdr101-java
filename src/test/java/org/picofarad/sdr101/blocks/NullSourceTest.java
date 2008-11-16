@@ -9,7 +9,7 @@ public class NullSourceTest {
 	NullSource ns = new NullSource();
 
 	for (int i = 0; i < 1000; i++) {
-	    Assert.assertEquals(0.00, ns.out(), 0.0001);
+	    Assert.assertEquals(0.00, ns.output(), 0.0001);
 	}
     }
 }

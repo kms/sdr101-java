@@ -54,10 +54,10 @@ public class FilterFactoryTest {
 	FirFilter ff = FilterFactory.loadFirFromFile("/firTest.txt");
 	Assert.assertNotNull(ff);
 
-	ff.setSource(new ImpulseSource());
-	Assert.assertEquals(1.0, ff.out(), 0.0001);
-	Assert.assertEquals(2.0, ff.out(), 0.0001);
-	Assert.assertEquals(0.12345, ff.out(), 0.0001);
-	Assert.assertEquals(-0.5, ff.out(), 0.0001);
+	ff.setInput(new ImpulseSource());
+	Assert.assertEquals(1.0, ff.output(), 0.0001);
+	Assert.assertEquals(2.0, ff.output(), 0.0001);
+	Assert.assertEquals(0.12345, ff.output(), 0.0001);
+	Assert.assertEquals(-0.5, ff.output(), 0.0001);
     }
 }

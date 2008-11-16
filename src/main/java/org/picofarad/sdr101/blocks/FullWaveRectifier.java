@@ -1,13 +1,13 @@
 package org.picofarad.sdr101.blocks;
 
 public class FullWaveRectifier implements SignalBlock {
-    private SignalBlock source;
+    private SignalBlock input;
 
-    public FullWaveRectifier(SignalBlock s) {
-	source = s;
+    public FullWaveRectifier(SignalBlock sb) {
+	input = sb;
     }
 
-    public double out() {
-	return Math.abs(source.out());
+    public double output() {
+	return Math.abs(input.output());
     }
 }

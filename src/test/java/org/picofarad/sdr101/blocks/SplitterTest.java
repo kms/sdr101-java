@@ -14,9 +14,9 @@ public class SplitterTest {
 	Splitter s = new Splitter(bs);
 	SplitterOutput o1 = s.createOutput();
 
-	Assert.assertEquals(1.0, o1.out(), 0.0001);
-	Assert.assertEquals(0.5, o1.out(), 0.0001);
-	Assert.assertEquals(0.25, o1.out(), 0.0001);
+	Assert.assertEquals(1.0, o1.output(), 0.0001);
+	Assert.assertEquals(0.5, o1.output(), 0.0001);
+	Assert.assertEquals(0.25, o1.output(), 0.0001);
     }
 
     @Test
@@ -30,14 +30,14 @@ public class SplitterTest {
 	SplitterOutput o1 = s.createOutput();
 	SplitterOutput o2 = s.createOutput();
 
-	Assert.assertEquals(1.0, o1.out(), 0.0001);
-	Assert.assertEquals(1.0, o2.out(), 0.0001);
+	Assert.assertEquals(1.0, o1.output(), 0.0001);
+	Assert.assertEquals(1.0, o2.output(), 0.0001);
 
-	Assert.assertEquals(0.5, o1.out(), 0.0001);
-	Assert.assertEquals(0.5, o2.out(), 0.0001);
+	Assert.assertEquals(0.5, o1.output(), 0.0001);
+	Assert.assertEquals(0.5, o2.output(), 0.0001);
 
-	Assert.assertEquals(0.25, o1.out(), 0.0001);
-	Assert.assertEquals(0.25, o2.out(), 0.0001);
+	Assert.assertEquals(0.25, o1.output(), 0.0001);
+	Assert.assertEquals(0.25, o2.output(), 0.0001);
     }
 
     @Test
@@ -52,18 +52,18 @@ public class SplitterTest {
 	SplitterOutput o2 = s.createOutput();
 	SplitterOutput o3 = s.createOutput();
 
-	Assert.assertEquals(1.0, o3.out(), 0.0001);
+	Assert.assertEquals(1.0, o3.output(), 0.0001);
 
-	Assert.assertEquals(1.0, o1.out(), 0.0001);
-	Assert.assertEquals(0.5, o1.out(), 0.0001);
-	Assert.assertEquals(0.25, o1.out(), 0.0001);
+	Assert.assertEquals(1.0, o1.output(), 0.0001);
+	Assert.assertEquals(0.5, o1.output(), 0.0001);
+	Assert.assertEquals(0.25, o1.output(), 0.0001);
 
-	Assert.assertEquals(1.0, o2.out(), 0.0001);
-	Assert.assertEquals(0.5, o2.out(), 0.0001);
-	Assert.assertEquals(0.25, o2.out(), 0.0001);
+	Assert.assertEquals(1.0, o2.output(), 0.0001);
+	Assert.assertEquals(0.5, o2.output(), 0.0001);
+	Assert.assertEquals(0.25, o2.output(), 0.0001);
 
-	Assert.assertEquals(0.5, o3.out(), 0.0001);
-	Assert.assertEquals(0.25, o3.out(), 0.0001);
+	Assert.assertEquals(0.5, o3.output(), 0.0001);
+	Assert.assertEquals(0.25, o3.output(), 0.0001);
     }
 
     @Test
@@ -81,12 +81,12 @@ public class SplitterTest {
 	SplitterOutput oB1 = sB.createOutput();
 	SplitterOutput oB2 = sB.createOutput();
 
-	Assert.assertEquals(1.0, oB2.out(), 0.0001);
-	Assert.assertEquals(0.5, oB2.out(), 0.0001);
-	Assert.assertEquals(0.25, oB2.out(), 0.0001);
+	Assert.assertEquals(1.0, oB2.output(), 0.0001);
+	Assert.assertEquals(0.5, oB2.output(), 0.0001);
+	Assert.assertEquals(0.25, oB2.output(), 0.0001);
 
-	Assert.assertEquals(1.0, oA2.out(), 0.0001);
-	Assert.assertEquals(0.5, oA2.out(), 0.0001);
-	Assert.assertEquals(0.25, oA2.out(), 0.0001);
+	Assert.assertEquals(1.0, oA2.output(), 0.0001);
+	Assert.assertEquals(0.5, oA2.output(), 0.0001);
+	Assert.assertEquals(0.25, oA2.output(), 0.0001);
     }
 }

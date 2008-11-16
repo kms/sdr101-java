@@ -23,18 +23,18 @@ public class CumulativeAverageFilterTest {
 
 	CumulativeAverageFilter maf = new CumulativeAverageFilter(bs, 2);
 
-	Assert.assertEquals(0.0, maf.out(), 0.001);
-	Assert.assertEquals(0.5, maf.out(), 0.001);
-	Assert.assertEquals(0.25, maf.out(), 0.001);
-	Assert.assertEquals(0.625, maf.out(), 0.001);
-	Assert.assertEquals(0.8125, maf.out(), 0.001);
-	maf.out();
-	maf.out();
-	maf.out();
-	maf.out();
-	maf.out();
-	maf.out();
-	Assert.assertEquals(1.0, maf.out(), 0.1);
+	Assert.assertEquals(0.0, maf.output(), 0.001);
+	Assert.assertEquals(0.5, maf.output(), 0.001);
+	Assert.assertEquals(0.25, maf.output(), 0.001);
+	Assert.assertEquals(0.625, maf.output(), 0.001);
+	Assert.assertEquals(0.8125, maf.output(), 0.001);
+	maf.output();
+	maf.output();
+	maf.output();
+	maf.output();
+	maf.output();
+	maf.output();
+	Assert.assertEquals(1.0, maf.output(), 0.1);
     }
 
     @Test
@@ -43,11 +43,11 @@ public class CumulativeAverageFilterTest {
 	CumulativeAverageFilter maf = new CumulativeAverageFilter(lo, 44100);
 
 	for (int i = 0; i < 44100; i++) {
-	    maf.out();
+	    maf.output();
 	}
 
 	for (int i = 0; i < 100; i++) {
-	    Assert.assertEquals(0.0, maf.out(), 0.001);
+	    Assert.assertEquals(0.0, maf.output(), 0.001);
 	}
     }
 }

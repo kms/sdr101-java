@@ -1,6 +1,5 @@
 package org.picofarad.sdr101.blocks;
 
-
 public class SineSource implements SignalBlock {
     private int sampleRate;
     private double frequency;
@@ -21,7 +20,7 @@ public class SineSource implements SignalBlock {
 	phaseOffset = p;
     }
 
-    public double out() {
+    public double output() {
 	double r;
 	double position = (double) sampleNumber / sampleRate;
 	double offset = (phaseOffset / 360) / frequency;

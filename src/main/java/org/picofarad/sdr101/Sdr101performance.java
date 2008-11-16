@@ -22,21 +22,12 @@ public class Sdr101performance {
 	Mixer mQ = new Mixer(q, loQ);
 	Summer s = new Summer(mI, mQ);
 	FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
-	ff.setSource(s);
+	ff.setInput(s);
 	Splitter spl = new Splitter(ff);
 	SplitterOutput so = spl.createOutput();
 
-	for (int j = 0; j < ff.taps(); j++) {
-	    desired.out();
-	    so.out();
-	}
-
-	for (int j = 0; j < ff.taps() / 2; j++) {
-	    so.out();
-	}
-
 	for (int j = 0; j < fs * 60; j++) {
-	    so.out();
+	    so.output();
 	}
     }
 }

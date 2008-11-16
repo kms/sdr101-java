@@ -7,7 +7,7 @@ public class ImpulseSource implements SignalBlock {
 	first = true;
     }
 
-    public double out() {
+    public double output() {
 	if (first) {
 	    first = false;
 	    return 1.0;

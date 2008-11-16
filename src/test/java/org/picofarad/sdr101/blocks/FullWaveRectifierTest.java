@@ -16,10 +16,10 @@ public class FullWaveRectifierTest {
 
 	FullWaveRectifier fwr = new FullWaveRectifier(bs);
 
-	Assert.assertEquals(0.0, fwr.out(), 0.0001);
-	Assert.assertEquals(1.0, fwr.out(), 0.0001);
-	Assert.assertEquals(0.25, fwr.out(), 0.0001);
-	Assert.assertEquals(1.0, fwr.out(), 0.0001);
-	Assert.assertEquals(0.75, fwr.out(), 0.0001);
+	Assert.assertEquals(0.0, fwr.output(), 0.0001);
+	Assert.assertEquals(1.0, fwr.output(), 0.0001);
+	Assert.assertEquals(0.25, fwr.output(), 0.0001);
+	Assert.assertEquals(1.0, fwr.output(), 0.0001);
+	Assert.assertEquals(0.75, fwr.output(), 0.0001);
     }
 }

@@ -14,7 +14,7 @@ public class BufferSource implements SignalBlock {
 	buffer.offer(d);
     }
 
-    public double out() {
+    public double output() {
 	if (buffer.isEmpty()) {
 	    return 0.0;
 	} else {

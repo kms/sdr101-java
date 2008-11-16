@@ -1,23 +1,15 @@
 package org.picofarad.sdr101.blocks;
 
 public class Mixer implements SignalBlock {
-    private SignalBlock sourceA;
-    private SignalBlock sourceB;
+    private SignalBlock inputA;
+    private SignalBlock inputB;
 
     public Mixer(SignalBlock a, SignalBlock b) {
-	sourceA = a;
-	sourceB = b;
+	inputA = a;
+	inputB = b;
     }
 
-    public void setSourceA(SignalBlock sb) {
-	sourceA = sb;
-    }
-
-    public void setSourceB(SignalBlock sb) {
-	sourceB = sb;
-    }
-
-    public double out() {
-	return sourceA.out() * sourceB.out();
+    public double output() {
+	return inputA.output() * inputB.output();
     }
 }

@@ -7,7 +7,7 @@ public class SplitterOutput implements SignalBlock {
 	splitter = s;
     }
 
-    public double out() {
-	return splitter.out(this);
+    public double output() {
+	return splitter.output(this);
     }
 }

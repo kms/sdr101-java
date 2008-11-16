@@ -9,33 +9,33 @@ import java.util.ArrayDeque;
 public class FirFilter implements SignalBlock {
     private Double[] coefficients;
     private Deque<Double> buffer;
-    private SignalBlock source;
+    private SignalBlock input;
 
     public FirFilter(List<Double> f) {
 	buffer = new ArrayDeque<Double>();
 	coefficients = f.toArray(new Double[0]);
-	source = new NullSource();
+	setInput(new NullSource());
+    }
+
+    public void setInput(SignalBlock sb) {
+	input = sb;
 	fillBuffer();
-    }
-
-    public void setSource(SignalBlock sb) {
-	source = sb;
-    }
-
-    public void fillBuffer() {
-        while (buffer.size() < taps()) {
-	    buffer.add(source.out());
-	}
     }
 
     public int taps() {
 	return coefficients.length;
     }
 
-    public double out() {
+    private void fillBuffer() {
+        while (buffer.size() < taps()) {
+	    buffer.add(input.output());
+	}
+    }
+
+    public double output() {
 	double d = 0.0;
 
-	buffer.offerFirst(source.out());
+	buffer.offerFirst(input.output());
 	buffer.removeLast();
 
 	int i = 0;

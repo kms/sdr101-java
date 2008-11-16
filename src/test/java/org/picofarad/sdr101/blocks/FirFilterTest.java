@@ -30,7 +30,7 @@ public class FirFilterTest {
 	FirFilter ff = new FirFilter(c);
 
 	for (int i = 0; i < 441000; i++) {
-	    Assert.assertEquals(0.0, ff.out(), 0.0001);
+	    Assert.assertEquals(0.0, ff.output(), 0.0001);
 	}
     }
 
@@ -44,10 +44,10 @@ public class FirFilterTest {
 	c.add(-1.0);
 
 	FirFilter ff = new FirFilter(c);
-	ff.setSource(new ImpulseSource());
+	ff.setInput(new ImpulseSource());
 
 	for (int i = 0; i < c.size(); i++) {
-	    Assert.assertEquals(c.get(i), ff.out(), 0.0001);
+	    Assert.assertEquals(c.get(i), ff.output(), 0.0001);
 	}
     }
 }

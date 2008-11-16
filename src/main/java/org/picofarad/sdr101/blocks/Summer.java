@@ -1,35 +1,23 @@
 package org.picofarad.sdr101.blocks;
 
 public class Summer implements SignalBlock {
-    private SignalBlock sourceA;
-    private SignalBlock sourceB;
-    private boolean invert;
+    protected SignalBlock inputA;
+    protected SignalBlock inputB;
 
     public Summer(SignalBlock a, SignalBlock b) {
-	sourceA = a;
-	sourceB = b;
-	invert = false;
+	inputA = a;
+	inputB = b;
     }
 
-    public Summer(SignalBlock a, SignalBlock b, boolean i) {
-	sourceA = a;
-	sourceB = b;
-	invert = i;
+    public void setInputA(SignalBlock sb) {
+	inputA = sb;
     }
 
-    public void setSourceA(SignalBlock sb) {
-	sourceA = sb;
+    public void setInputB(SignalBlock sb) {
+	inputB = sb;
     }
 
-    public void setSourceB(SignalBlock sb) {
-	sourceB = sb;
-    }
-
-    public double out() {
-	if (invert) {
-	    return sourceA.out() - sourceB.out();
-	} else {
-	    return sourceA.out() + sourceB.out();
-	}
+    public double output() {
+	return inputA.output() + inputB.output();
     }
 }

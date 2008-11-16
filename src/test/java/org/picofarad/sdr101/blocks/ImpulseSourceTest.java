@@ -8,10 +8,10 @@ public class ImpulseSourceTest {
     public void testOut() {
 	ImpulseSource is = new ImpulseSource();
 
-	Assert.assertEquals(1.00, is.out(), 0.0001);
+	Assert.assertEquals(1.00, is.output(), 0.0001);
 
 	for (int i = 0; i < 1000; i++) {
-	    Assert.assertEquals(0.00, is.out(), 0.0001);
+	    Assert.assertEquals(0.00, is.output(), 0.0001);
 	}
     }
 }

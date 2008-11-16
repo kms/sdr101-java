@@ -6,16 +6,12 @@ import java.util.Deque;
 import java.util.ArrayDeque;
 
 public class Splitter {
-    private SignalBlock source;
+    private SignalBlock input;
     private Map<SplitterOutput, Deque<Double>> outputs;
 
     public Splitter(SignalBlock s) {
-	source = s;
+	input = s;
 	outputs = new HashMap<SplitterOutput, Deque<Double>>();
-    }
-
-    public void setSource(SignalBlock sb) {
-	source = sb;
     }
 
     public SplitterOutput createOutput() {
@@ -26,23 +22,20 @@ public class Splitter {
     }
 
     private void fillAllBuffers() {
-	double sample = source.out();
+	double sample = input.output();
 
 	for (Deque<Double> buffer : outputs.values()) {
 	    buffer.offer(sample);
 	}
     }
 
-    public double out(SplitterOutput so) {
+    public double output(SplitterOutput so) {
 	Deque<Double> buffer = outputs.get(so);
-	if (buffer == null) {
-	    return 0.0;
-	} else {
-	    if (buffer.size() == 0) {
-		fillAllBuffers();
-	    }
 
-	    return buffer.remove();
+	if (buffer.size() == 0) {
+	    fillAllBuffers();
 	}
+
+	return buffer.remove();
     }
 }

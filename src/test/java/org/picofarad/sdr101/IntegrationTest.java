@@ -49,6 +49,30 @@ public class IntegrationTest {
     }
 
     @Test
+    public void testHilbertFilterLF() throws Exception {
+	int fs = 44100;
+	SineSource sine = new SineSource(fs, 3000, 0);
+	SineSource desired = new SineSource(fs, 3000, 0);
+
+	FirFilter ff = FilterFactory.loadFirFromFile("/firHilbert.txt");
+	ff.setInput(sine);
+
+	for (int i = 0; i < ff.taps(); i++) {
+	    desired.output();
+	    ff.output();
+	}
+
+	for (int i = 0; i < ff.taps() / 2; i++) {
+	    ff.output();
+	}
+
+	for (int j = 0; j < fs * 2; j++) {
+	//    Assert.assertEquals(desired.output(), ff.output(), 0.05);
+	    System.out.println(desired.output() + ", " + ff.output());
+	}
+    }
+
+    @Test
     public void testGenerateCarrierUSBInvertedSummer() {
 	int fs = 44100;
 	SineSource i = new SineSource(fs, 100, 0);
@@ -114,20 +138,20 @@ public class IntegrationTest {
 	Mixer mI = new Mixer(i, loI);
 	Mixer mQ = new Mixer(q, loQ);
 	Summer s = new Summer(mI, mQ);
-	FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
-	ff.setInput(s);
+	FirFilter lpf = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
+	lpf.setInput(s);
 
-	for (int j = 0; j < ff.taps(); j++) {
+	for (int j = 0; j < lpf.taps(); j++) {
 	    desired.output();
-	    ff.output();
+	    lpf.output();
 	}
 
-	for (int j = 0; j < ff.taps() / 2; j++) {
-	    ff.output();
+	for (int j = 0; j < lpf.taps() / 2; j++) {
+	    lpf.output();
 	}
 
 	for (int j = 0; j < fs * 2; j++) {
-	    Assert.assertEquals(desired.output(), ff.output(), 0.01);
+	    Assert.assertEquals(desired.output(), lpf.output(), 0.01);
 	}
     }
 }

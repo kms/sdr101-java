@@ -5,7 +5,7 @@ import org.junit.Assert;
 
 public class ImpulseSourceTest {
     @Test
-    public void testOut() {
+    public void testOutput() {
 	ImpulseSource is = new ImpulseSource();
 
 	Assert.assertEquals(1.00, is.output(), 0.0001);

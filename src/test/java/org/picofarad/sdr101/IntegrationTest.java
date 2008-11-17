@@ -67,8 +67,8 @@ public class IntegrationTest {
 	}
 
 	for (int j = 0; j < fs * 2; j++) {
-	//    Assert.assertEquals(desired.output(), ff.output(), 0.05);
-	    System.out.println(desired.output() + ", " + ff.output());
+	    Assert.assertEquals(desired.output(), ff.output(), 0.05);
+	    //System.out.println(desired.output() + ", " + ff.output());
 	}
     }
 

@@ -5,7 +5,7 @@ import org.junit.Assert;
 
 public class NullSourceTest {
     @Test
-    public void testOut() {
+    public void testOutput() {
 	NullSource ns = new NullSource();
 
 	for (int i = 0; i < 1000; i++) {

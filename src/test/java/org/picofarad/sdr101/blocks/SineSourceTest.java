@@ -5,31 +5,31 @@ import org.junit.Assert;
 
 public class SineSourceTest {
     @Test
-    public void testOutAt2Hz() {
+    public void testOutputAt2Hz() {
 	SineSource lo = new SineSource(8, 2);
 
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(1.0, lo.output(), 0.0001);
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(-1.0, lo.output(), 0.0001);
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(1.0, lo.output(), 0.0001);
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(-1.0, lo.output(), 0.0001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(-1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(-1.0, lo.output(), 0.001);
     }
 
     @Test
-    public void testOutAtOneFourth() {
+    public void testOutputAtOneFourth() {
 	SineSource lo = new SineSource(4, 1);
 
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(1.0, lo.output(), 0.0001);
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(-1.0, lo.output(), 0.0001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(-1.0, lo.output(), 0.001);
     }
 
     @Test
-    public void testOutAtOneEight() {
+    public void testOutputAtOneEight() {
 	SineSource lo = new SineSource(8, 1);
 
 	Assert.assertEquals(0.0, lo.output(), 0.001);
@@ -43,19 +43,19 @@ public class SineSourceTest {
     }
 
     @Test
-    public void testOutWithMultipleCycles() {
+    public void testOutputWithMultipleCycles() {
 	SineSource lo = new SineSource(4, 1);
 
 	for (int i = 0; i < 1000; i++) {
-	    Assert.assertEquals(0.0, lo.output(), 0.0001);
-	    Assert.assertEquals(1.0, lo.output(), 0.0001);
-	    Assert.assertEquals(0.0, lo.output(), 0.0001);
-	    Assert.assertEquals(-1.0, lo.output(), 0.0001);
+	    Assert.assertEquals(0.0, lo.output(), 0.001);
+	    Assert.assertEquals(1.0, lo.output(), 0.001);
+	    Assert.assertEquals(0.0, lo.output(), 0.001);
+	    Assert.assertEquals(-1.0, lo.output(), 0.001);
 	}
     }
 
     @Test
-    public void testOut90PhaseOffset() {
+    public void testOutput90PhaseOffset() {
 	SineSource lo = new SineSource(8, 1, 90);
 
 	Assert.assertEquals(1.0, lo.output(), 0.001);
@@ -69,7 +69,7 @@ public class SineSourceTest {
     }
 
     @Test
-    public void testOut90PhaseOffsetAt2Hz() {
+    public void testOutput90PhaseOffsetAt2Hz() {
 	SineSource lo = new SineSource(8, 2, 90);
 
 	Assert.assertEquals(1.0, lo.output(), 0.001);
@@ -83,22 +83,43 @@ public class SineSourceTest {
     }
 
     @Test
-    public void testOut180PhaseOffset() {
+    public void testOutput180PhaseOffset() {
 	SineSource lo = new SineSource(4, 1, 180);
 
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(-1.0, lo.output(), 0.0001);
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(1.0, lo.output(), 0.0001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(-1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
     }
 
     @Test
-    public void testOutNeg90PhaseOffset() {
+    public void testOutputNeg90PhaseOffset() {
 	SineSource lo = new SineSource(4, 1, -90);
 
-	Assert.assertEquals(-1.0, lo.output(), 0.0001);
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
-	Assert.assertEquals(1.0, lo.output(), 0.0001);
-	Assert.assertEquals(0.0, lo.output(), 0.0001);
+	Assert.assertEquals(-1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+    }
+
+    @Test
+    public void testSetFrequency() {
+	SineSource lo = new SineSource(8, 2);
+
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(-1.0, lo.output(), 0.001);
+	
+	lo.setFrequency(1);
+	
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(-1.0, lo.output(), 0.001);
+
+	Assert.assertEquals(0.0, lo.output(), 0.001);
+	Assert.assertEquals(0.707, lo.output(), 0.001);
+	Assert.assertEquals(1.0, lo.output(), 0.001);
     }
 }

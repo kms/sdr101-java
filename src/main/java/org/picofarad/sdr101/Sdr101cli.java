@@ -63,8 +63,6 @@ public class Sdr101cli {
 	lineAfSpeaker.start();
 
 	int fs = 44100;
-	SineSource i = new SineSource(fs, 8000, 0);
-	SineSource q = new SineSource(fs, 8000, 90);
 	SineSource loI = new SineSource(fs, 8000, 0);
 	SineSource loQ = new SineSource(fs, 8000, 90);
 
@@ -76,22 +74,19 @@ public class Sdr101cli {
 	while (true) {
 	    numBytesRead = lineSdrRx.read(data, 0, 4);
 	    for (int j = 0; j < data.length; j += 4) {
-		double d = i.output();
+		//double d = i.output();
+//		int nSample = (int) Math.round(d * 32766.0);
+//		byte high = (byte) ((nSample >> 8) & 0xFF);
+//		byte low = (byte) (nSample & 0xFF);
+//		data[j + 0] = high;
+//		data[j + 1] = low;
 
-		d = Math.min(1.0, Math.max(-1.0, d));
-		int nSample = (int) Math.round(d * 32767.0);
-		byte high = (byte) ((nSample >> 8) & 0xFF);
-		byte low = (byte) (nSample & 0xFF);
-		data[j + 0] = high;
-		data[j + 1] = low;
-
-		d = q.output();
-		d = Math.min(1.0, Math.max(-1.0, d));
-		nSample = (int) Math.round(d * 32767.0);
-		high = (byte) ((nSample >> 8) & 0xFF);
-		low = (byte) (nSample & 0xFF);
-		data[j+2] = high;
-		data[j+3] = low;
+//		d = q.output();
+//		nSample = (int) Math.round(d * 32766.0);
+//		high = (byte) ((nSample >> 8) & 0xFF);
+//		low = (byte) (nSample & 0xFF);
+//		data[j+2] = high;
+//		data[j+3] = low;
 	    }
 	    lineAfSpeaker.write(data, 0, data.length);
 	}

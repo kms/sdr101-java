@@ -1,6 +1,8 @@
 package org.picofarad.sdr101;
 
 import org.picofarad.sdr101.blocks.SineSource;
+import org.picofarad.sdr101.blocks.Summer;
+import org.picofarad.sdr101.blocks.ByteArraySource;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.ByteArrayOutputStream;
@@ -33,23 +35,15 @@ public class Sdr101cli {
 	mixerAf = mi[2];
 
 	AudioFormat formatSdrRx = new AudioFormat(44100, 16, 1, true, true);
-	AudioFormat formatAfSpeaker = new AudioFormat(44100, 16, 2, true, true);
-	AudioFormat formatSdrTx = new AudioFormat(44100, 16, 2, true, true);
-	AudioFormat formatAfMic = new AudioFormat(44100, 16, 2, true, true);
+	AudioFormat formatAfSpeaker = new AudioFormat(44100, 16, 1, true, true);
 
 	DataLine.Info infoSdrRx = null;
-	DataLine.Info infoSdrTx = null;
 	DataLine.Info infoAfSpeaker = null;
-	DataLine.Info infoAfMic = null;
 	infoSdrRx = new DataLine.Info(TargetDataLine.class, formatSdrRx); 
-	infoSdrTx = new DataLine.Info(SourceDataLine.class, formatSdrTx); 
 	infoAfSpeaker = new DataLine.Info(SourceDataLine.class, formatAfSpeaker); 
-	infoAfMic = new DataLine.Info(TargetDataLine.class, formatAfMic); 
 
 	TargetDataLine lineSdrRx;
-	SourceDataLine lineSdrTx;
 	SourceDataLine lineAfSpeaker;
-	TargetDataLine lineAfMic;
 
 	lineSdrRx = (TargetDataLine) AudioSystem.getMixer(mixerSdr).getLine(infoSdrRx);
 	lineAfSpeaker = (SourceDataLine) AudioSystem.getMixer(mixerAf).getLine(infoAfSpeaker);
@@ -65,30 +59,27 @@ public class Sdr101cli {
 	int fs = 44100;
 	SineSource loI = new SineSource(fs, 8000, 0);
 	SineSource loQ = new SineSource(fs, 8000, 90);
+	ByteArraySource basI = new ByteArraySource(data, 0, 1);
+	ByteArraySource basQ = new ByteArraySource(data, 2, 3);
 
-	//org.picofarad.sdr101.blocks.Mixer mI = new org.picofarad.sdr101.blocks.Mixer(i, loI);
-	//org.picofarad.sdr101.blocks.Mixer mQ = new org.picofarad.sdr101.blocks.Mixer(q, loQ);
+	org.picofarad.sdr101.blocks.Mixer mI = new org.picofarad.sdr101.blocks.Mixer(basI, loI);
+	org.picofarad.sdr101.blocks.Mixer mQ = new org.picofarad.sdr101.blocks.Mixer(basQ, loQ);
 
-	//Summer summer = new Summer(mI, mQ);
+	Summer summer = new Summer(mI, mQ);
 
 	while (true) {
-	    numBytesRead = lineSdrRx.read(data, 0, 4);
-	    for (int j = 0; j < data.length; j += 4) {
-		//double d = i.output();
-//		int nSample = (int) Math.round(d * 32766.0);
-//		byte high = (byte) ((nSample >> 8) & 0xFF);
+	    numBytesRead = lineSdrRx.read(data, 0, 2);
+	    //int j = 0;
+	//    for (int j = 0; j < data.length; j += 4) {
+	//	double d = summer.output();
+	//	int nSample = (int) Math.round(d * 32766.0);
+		//byte high = (byte) ((nSample >> 8) & 0xFF);
 //		byte low = (byte) (nSample & 0xFF);
 //		data[j + 0] = high;
 //		data[j + 1] = low;
 
-//		d = q.output();
-//		nSample = (int) Math.round(d * 32766.0);
-//		high = (byte) ((nSample >> 8) & 0xFF);
-//		low = (byte) (nSample & 0xFF);
-//		data[j+2] = high;
-//		data[j+3] = low;
-	    }
-	    lineAfSpeaker.write(data, 0, data.length);
+	  //  }
+	    lineAfSpeaker.write(data, 0, 2);
 	}
 
 	/*

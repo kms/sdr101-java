@@ -1,8 +1,12 @@
 package org.picofarad.sdr101;
 
 import org.picofarad.sdr101.blocks.SineSource;
+import org.picofarad.sdr101.blocks.NullSource;
 import org.picofarad.sdr101.blocks.Summer;
+import org.picofarad.sdr101.blocks.InvertedSummer;
 import org.picofarad.sdr101.blocks.ByteArraySource;
+import org.picofarad.sdr101.blocks.FirFilter;
+import org.picofarad.sdr101.blocks.FilterFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.ByteArrayOutputStream;
@@ -31,10 +35,10 @@ public class Sdr101cli {
 	    }
 	}
 
-	mixerSdr = mi[2];
-	mixerAf = mi[2];
+	mixerSdr = mi[0];
+	mixerAf = mi[0];
 
-	AudioFormat formatSdrRx = new AudioFormat(44100, 16, 1, true, true);
+	AudioFormat formatSdrRx = new AudioFormat(44100, 16, 2, true, true);
 	AudioFormat formatAfSpeaker = new AudioFormat(44100, 16, 2, true, true);
 
 	DataLine.Info infoSdrRx = null;
@@ -51,37 +55,48 @@ public class Sdr101cli {
 	lineAfSpeaker.open(formatAfSpeaker);
 
 	int numBytesRead;
-	byte[] data = new byte[400];
+	int bufferSize = 400;
+	byte[] dataSdrRx= new byte[bufferSize];
+	byte[] dataAfSpeaker = new byte[bufferSize];
 
 	lineSdrRx.start();
 	lineAfSpeaker.start();
 
 	int fs = 44100;
-	SineSource loI = new SineSource(fs, 8000, 0);
-	SineSource loQ = new SineSource(fs, 8000, 90);
-	ByteArraySource basI = new ByteArraySource(data, 0, 1);
-	ByteArraySource basQ = new ByteArraySource(data, 2, 3);
+	SineSource loI = new SineSource(fs, 2000, 0);
+	SineSource loQ = new SineSource(fs, 2000, 90);
+	ByteArraySource basI = new ByteArraySource(dataSdrRx, 0, 1);
+	ByteArraySource basQ = new ByteArraySource(dataSdrRx, 2, 3);
 
 	org.picofarad.sdr101.blocks.Mixer mI = new org.picofarad.sdr101.blocks.Mixer(basI, loI);
 	org.picofarad.sdr101.blocks.Mixer mQ = new org.picofarad.sdr101.blocks.Mixer(basQ, loQ);
 
 	Summer summer = new Summer(mI, mQ);
+	FirFilter lpf = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
+	lpf.setInput(summer);
 
 	while (true) {
-	    numBytesRead = lineSdrRx.read(data, 0, 2);
-	    int j = 0;
-	    //for (int j = 0; j < data.length; j += 4) {
+	    numBytesRead = lineSdrRx.read(dataSdrRx, 0, bufferSize);
+	    for (int j = 0; j < bufferSize; j += 4) {
+	        basI.setHighIndex(j);
+		basI.setLowIndex(j + 1);
+		basQ.setHighIndex(j + 2);
+		basQ.setLowIndex(j + 3);
 		double d = summer.output();
 		int nSample = (int) Math.round(d * 32766.0);
 		byte high = (byte) ((nSample >> 8) & 0xFF);
 		byte low = (byte) (nSample & 0xFF);
-		data[j + 0] = high;
-		data[j + 1] = low;
-		data[j + 2] = high;
-		data[j + 3] = low;
-
-	  //  }
-	    lineAfSpeaker.write(data, 0, 4);
+		dataAfSpeaker[j + 0] = high;
+		dataAfSpeaker[j + 1] = low;
+		//d = ();
+		//d = 0.0;
+		//nSample = (int) Math.round(d * 32766.0);
+		//high = (byte) ((nSample >> 8) & 0xFF);
+		//low = (byte) (nSample & 0xFF);
+		dataAfSpeaker[j + 2] = high;
+		dataAfSpeaker[j + 3] = low;
+	    }
+	    lineAfSpeaker.write(dataAfSpeaker, 0, bufferSize);
 	}
 
 	/*

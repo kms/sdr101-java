@@ -84,10 +84,10 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testHilbertFilterLF() throws Exception {
+    public void testHilbertFilter() throws Exception {
 	int fs = 44100;
 	SineSource sine = new SineSource(fs, 3000, 0);
-	SineSource desired = new SineSource(fs, 3000, 0);
+	SineSource desired = new SineSource(fs, 3000, -90);
 
 	FirFilter ff = FilterFactory.loadFirFromFile("/firHilbert.txt");
 	ff.setInput(sine);

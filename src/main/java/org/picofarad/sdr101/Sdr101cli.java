@@ -35,7 +35,7 @@ public class Sdr101cli {
 	mixerAf = mi[2];
 
 	AudioFormat formatSdrRx = new AudioFormat(44100, 16, 1, true, true);
-	AudioFormat formatAfSpeaker = new AudioFormat(44100, 16, 1, true, true);
+	AudioFormat formatAfSpeaker = new AudioFormat(44100, 16, 2, true, true);
 
 	DataLine.Info infoSdrRx = null;
 	DataLine.Info infoAfSpeaker = null;
@@ -69,17 +69,19 @@ public class Sdr101cli {
 
 	while (true) {
 	    numBytesRead = lineSdrRx.read(data, 0, 2);
-	    //int j = 0;
-	//    for (int j = 0; j < data.length; j += 4) {
-	//	double d = summer.output();
-	//	int nSample = (int) Math.round(d * 32766.0);
-		//byte high = (byte) ((nSample >> 8) & 0xFF);
-//		byte low = (byte) (nSample & 0xFF);
-//		data[j + 0] = high;
-//		data[j + 1] = low;
+	    int j = 0;
+	    //for (int j = 0; j < data.length; j += 4) {
+		double d = summer.output();
+		int nSample = (int) Math.round(d * 32766.0);
+		byte high = (byte) ((nSample >> 8) & 0xFF);
+		byte low = (byte) (nSample & 0xFF);
+		data[j + 0] = high;
+		data[j + 1] = low;
+		data[j + 2] = high;
+		data[j + 3] = low;
 
 	  //  }
-	    lineAfSpeaker.write(data, 0, 2);
+	    lineAfSpeaker.write(data, 0, 4);
 	}
 
 	/*

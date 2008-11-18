@@ -14,6 +14,41 @@ import org.picofarad.sdr101.blocks.Mixer;
 
 public class IntegrationTest {
     @Test
+    public void testHPFilterStopBand() throws Exception {
+	int fs = 44100;
+	FirFilter ff = FilterFactory.loadFirFromFile("/firHP300HzAt44100.txt");
+	ff.setInput(new SineSource(fs, 1));
+
+	for (int i = 0; i < fs * 2; i++) {
+	    Assert.assertEquals(0.0, ff.output(), 0.5);
+	}
+    }
+
+    @Test
+    public void testHPFilterPassBand() throws Exception {
+	int fs = 44100;
+	SineSource sineSource = new SineSource(fs, 2000);
+	Splitter s = new Splitter(sineSource);
+	SignalBlock sinePristine = s.createOutput();
+
+	FirFilter ff = FilterFactory.loadFirFromFile("/firHP300HzAt44100.txt");
+	ff.setInput(s.createOutput());
+
+	for (int i = 0; i < ff.taps(); i++) {
+	    sinePristine.output();
+	    ff.output();
+	}
+
+	for (int i = 0; i < ff.taps() / 2; i++) {
+	    ff.output();
+	}
+
+	for (int i = 0; i < fs * 2; i++) {
+	    Assert.assertEquals(sinePristine.output(), ff.output(), 0.05);
+	}
+    }
+
+    @Test
     public void testLPFilterStopBand() throws Exception {
 	int fs = 44100;
 	FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");

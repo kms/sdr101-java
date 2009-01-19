@@ -4,10 +4,10 @@ public class FullWaveRectifier implements SignalBlock {
     private SignalBlock input;
 
     public FullWaveRectifier(SignalBlock sb) {
-	input = sb;
+        input = sb;
     }
 
     public double output() {
-	return Math.abs(input.output());
+        return Math.abs(input.output());
     }
 }

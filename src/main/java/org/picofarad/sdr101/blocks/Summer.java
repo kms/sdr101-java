@@ -5,19 +5,19 @@ public class Summer implements SignalBlock {
     protected SignalBlock inputB;
 
     public Summer(SignalBlock a, SignalBlock b) {
-	inputA = a;
-	inputB = b;
+        inputA = a;
+        inputB = b;
     }
 
     public void setInputA(SignalBlock sb) {
-	inputA = sb;
+        inputA = sb;
     }
 
     public void setInputB(SignalBlock sb) {
-	inputB = sb;
+        inputB = sb;
     }
 
     public double output() {
-	return inputA.output() + inputB.output();
+        return inputA.output() + inputB.output();
     }
 }

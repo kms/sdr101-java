@@ -4,11 +4,11 @@ public class EnvelopeDetector implements SignalBlock {
     private SignalBlock input;
 
     public EnvelopeDetector(SignalBlock s, int l) {
-	FullWaveRectifier fwr = new FullWaveRectifier(s);
-	input = new CumulativeAverageFilter(fwr, l);
+        FullWaveRectifier fwr = new FullWaveRectifier(s);
+        input = new CumulativeAverageFilter(fwr, l);
     }
 
     public double output() {
-	return input.output();
+        return input.output();
     }
 }

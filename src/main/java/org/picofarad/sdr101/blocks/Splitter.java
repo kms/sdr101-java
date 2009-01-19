@@ -10,32 +10,32 @@ public class Splitter {
     private Map<SplitterOutput, Deque<Double>> outputs;
 
     public Splitter(SignalBlock s) {
-	input = s;
-	outputs = new HashMap<SplitterOutput, Deque<Double>>();
+        input = s;
+        outputs = new HashMap<SplitterOutput, Deque<Double>>();
     }
 
     public SplitterOutput createOutput() {
-	SplitterOutput so = new SplitterOutput(this);
-	outputs.put(so, new ArrayDeque<Double>());
+        SplitterOutput so = new SplitterOutput(this);
+        outputs.put(so, new ArrayDeque<Double>());
 
-	return so;
+        return so;
     }
 
     private void fillAllBuffers() {
-	double sample = input.output();
+        double sample = input.output();
 
-	for (Deque<Double> buffer : outputs.values()) {
-	    buffer.offer(sample);
-	}
+        for (Deque<Double> buffer : outputs.values()) {
+            buffer.offer(sample);
+        }
     }
 
     public double output(SplitterOutput so) {
-	Deque<Double> buffer = outputs.get(so);
+        Deque<Double> buffer = outputs.get(so);
 
-	if (buffer.size() == 0) {
-	    fillAllBuffers();
-	}
+        if (buffer.size() == 0) {
+            fillAllBuffers();
+        }
 
-	return buffer.remove();
+        return buffer.remove();
     }
 }

@@ -4,10 +4,10 @@ public class SplitterOutput implements SignalBlock {
     private Splitter splitter;
 
     public SplitterOutput(Splitter s) {
-	splitter = s;
+        splitter = s;
     }
 
     public double output() {
-	return splitter.output(this);
+        return splitter.output(this);
     }
 }

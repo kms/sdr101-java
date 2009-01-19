@@ -5,11 +5,11 @@ public class Mixer implements SignalBlock {
     private SignalBlock inputB;
 
     public Mixer(SignalBlock a, SignalBlock b) {
-	inputA = a;
-	inputB = b;
+        inputA = a;
+        inputB = b;
     }
 
     public double output() {
-	return inputA.output() * inputB.output();
+        return inputA.output() * inputB.output();
     }
 }

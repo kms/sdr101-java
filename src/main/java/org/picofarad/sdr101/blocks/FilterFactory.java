@@ -10,32 +10,32 @@ import java.util.ArrayList;
 
 public abstract class FilterFactory {
     protected static List<Double> loadCoefficientsFromFile(String f) 
-	throws IOException, FileNotFoundException {
-	InputStream is = FilterFactory.class.getResourceAsStream(f);
-	if (is == null) {
-	    throw new FileNotFoundException();
-	}
-	InputStreamReader isr = new InputStreamReader(is);
-	BufferedReader br = new BufferedReader(isr);
+        throws IOException, FileNotFoundException {
+        InputStream is = FilterFactory.class.getResourceAsStream(f);
+        if (is == null) {
+            throw new FileNotFoundException();
+        }
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
 
-	List<Double> coefficients = new ArrayList<Double>();
+        List<Double> coefficients = new ArrayList<Double>();
 
-	String line;
-	while ((line = br.readLine()) != null) {
-	    try {
-		double d = Double.valueOf(line.trim());
-		coefficients.add(d);
-	    } catch (NumberFormatException e) {
-		throw new IOException(e);
-	    }
-	}
+        String line;
+        while ((line = br.readLine()) != null) {
+            try {
+                double d = Double.valueOf(line.trim());
+                coefficients.add(d);
+            } catch (NumberFormatException e) {
+                throw new IOException(e);
+            }
+        }
 
-	return coefficients;
+        return coefficients;
     }
 
     public static FirFilter loadFirFromFile(String f) throws IOException {
-	List<Double> c = loadCoefficientsFromFile(f);
-	FirFilter ff = new FirFilter(c);
-	return ff;
+        List<Double> c = loadCoefficientsFromFile(f);
+        FirFilter ff = new FirFilter(c);
+        return ff;
     }
 }

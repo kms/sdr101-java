@@ -6,10 +6,10 @@ import org.junit.Assert;
 public class NullSourceTest {
     @Test
     public void testOutput() {
-	NullSource ns = new NullSource();
+        NullSource ns = new NullSource();
 
-	for (int i = 0; i < 1000; i++) {
-	    Assert.assertEquals(0.00, ns.output(), 0.0001);
-	}
+        for (int i = 0; i < 1000; i++) {
+            Assert.assertEquals(0.00, ns.output(), 0.0001);
+        }
     }
 }

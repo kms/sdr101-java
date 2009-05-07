@@ -12,6 +12,7 @@ public class InvertedSummer extends Summer {
         super(a, b);
     }
 
+    @Override
     public double output() {
         return inputA.output() - inputB.output();
     }

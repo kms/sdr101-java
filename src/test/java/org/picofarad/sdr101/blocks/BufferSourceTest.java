@@ -7,12 +7,12 @@
 
 package org.picofarad.sdr101.blocks;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class BufferSourceTest {
     @Test
-    public void testBufferSourceEmpty() { 
+    public void testBufferSourceEmpty() {
         BufferSource bs = new BufferSource();
 
         for (int i = 0; i < 100; i++) {
@@ -38,10 +38,10 @@ public class BufferSourceTest {
     @Test
     public void testBufferSourceGoingEmpty() {
         BufferSource bs = new BufferSource();
-        
+
         bs.buffer(1.0);
         bs.buffer(0.5);
-        
+
         Assert.assertEquals(1.0, bs.output(), 0.0001);
         Assert.assertEquals(0.5, bs.output(), 0.0001);
 

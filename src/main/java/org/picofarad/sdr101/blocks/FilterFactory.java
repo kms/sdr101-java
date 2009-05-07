@@ -7,17 +7,17 @@
 
 package org.picofarad.sdr101.blocks;
 
-import java.io.IOException;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class FilterFactory {
-    protected static List<Double> loadCoefficientsFromFile(String f) 
-        throws IOException, FileNotFoundException {
+    protected static List<Double> loadCoefficientsFromFile(String f)
+            throws IOException, FileNotFoundException {
         InputStream is = FilterFactory.class.getResourceAsStream(f);
         if (is == null) {
             throw new FileNotFoundException();

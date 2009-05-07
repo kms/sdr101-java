@@ -7,8 +7,8 @@
 
 package org.picofarad.sdr101.blocks;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class SineSourceTest {
     @Test
@@ -72,7 +72,7 @@ public class SineSourceTest {
         Assert.assertEquals(-1.0, lo.output(), 0.001);
         Assert.assertEquals(-0.707, lo.output(), 0.001);
         Assert.assertEquals(0.0, lo.output(), 0.001);
-        Assert.assertEquals(0.707, lo.output(), 0.001); 
+        Assert.assertEquals(0.707, lo.output(), 0.001);
     }
 
     @Test
@@ -117,9 +117,9 @@ public class SineSourceTest {
         Assert.assertEquals(1.0, lo.output(), 0.001);
         Assert.assertEquals(0.0, lo.output(), 0.001);
         Assert.assertEquals(-1.0, lo.output(), 0.001);
-        
+
         lo.setFrequency(1);
-        
+
         Assert.assertEquals(0.0, lo.output(), 0.001);
         Assert.assertEquals(1.0, lo.output(), 0.001);
         Assert.assertEquals(0.0, lo.output(), 0.001);

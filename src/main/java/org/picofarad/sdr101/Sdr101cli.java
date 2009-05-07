@@ -7,17 +7,19 @@
 
 package org.picofarad.sdr101;
 
-import org.picofarad.sdr101.blocks.SineSource;
-import org.picofarad.sdr101.blocks.Summer;
-import org.picofarad.sdr101.blocks.ByteArraySource;
-import org.picofarad.sdr101.blocks.FirFilter;
-import org.picofarad.sdr101.blocks.FilterFactory;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.TargetDataLine;
-import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.Mixer;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.Mixer.Info;
+
+import org.picofarad.sdr101.blocks.ByteArraySource;
+import org.picofarad.sdr101.blocks.FilterFactory;
+import org.picofarad.sdr101.blocks.FirFilter;
+import org.picofarad.sdr101.blocks.SineSource;
+import org.picofarad.sdr101.blocks.Summer;
 
 public class Sdr101cli {
     public static void main(String args[]) throws Exception {
@@ -25,13 +27,13 @@ public class Sdr101cli {
         Mixer.Info mixerSdr = null;
         Mixer.Info mixerAf = null;
 
-        for (int i = 0; i < mi.length; i++) {
-            System.out.println(mi[i].getName());
-            if (mi[i].getName().equals("default")) {
-                mixerSdr = mi[i];
+        for (Info element : mi) {
+            System.out.println(element.getName());
+            if (element.getName().equals("default")) {
+                mixerSdr = element;
             }
-            if (mi[i].getName().equals("default")) {
-                mixerAf = mi[i];
+            if (element.getName().equals("default")) {
+                mixerAf = element;
             }
         }
 
@@ -43,19 +45,21 @@ public class Sdr101cli {
 
         DataLine.Info infoSdrRx = null;
         DataLine.Info infoAfSpeaker = null;
-        infoSdrRx = new DataLine.Info(TargetDataLine.class, formatSdrRx); 
-        infoAfSpeaker = new DataLine.Info(SourceDataLine.class, formatAfSpeaker); 
+        infoSdrRx = new DataLine.Info(TargetDataLine.class, formatSdrRx);
+        infoAfSpeaker = new DataLine.Info(SourceDataLine.class, formatAfSpeaker);
 
         TargetDataLine lineSdrRx;
         SourceDataLine lineAfSpeaker;
 
-        lineSdrRx = (TargetDataLine) AudioSystem.getMixer(mixerSdr).getLine(infoSdrRx);
-        lineAfSpeaker = (SourceDataLine) AudioSystem.getMixer(mixerAf).getLine(infoAfSpeaker);
+        lineSdrRx = (TargetDataLine) AudioSystem.getMixer(mixerSdr).getLine(
+                infoSdrRx);
+        lineAfSpeaker = (SourceDataLine) AudioSystem.getMixer(mixerAf).getLine(
+                infoAfSpeaker);
         lineSdrRx.open(formatSdrRx);
         lineAfSpeaker.open(formatAfSpeaker);
 
         int bufferSize = 400;
-        byte[] dataSdrRx= new byte[bufferSize];
+        byte[] dataSdrRx = new byte[bufferSize];
         byte[] dataAfSpeaker = new byte[bufferSize];
 
         lineSdrRx.start();
@@ -67,8 +71,10 @@ public class Sdr101cli {
         ByteArraySource basI = new ByteArraySource(dataSdrRx, 0, 1);
         ByteArraySource basQ = new ByteArraySource(dataSdrRx, 2, 3);
 
-        org.picofarad.sdr101.blocks.Mixer mI = new org.picofarad.sdr101.blocks.Mixer(basI, loI);
-        org.picofarad.sdr101.blocks.Mixer mQ = new org.picofarad.sdr101.blocks.Mixer(basQ, loQ);
+        org.picofarad.sdr101.blocks.Mixer mI = new org.picofarad.sdr101.blocks.Mixer(
+                basI, loI);
+        org.picofarad.sdr101.blocks.Mixer mQ = new org.picofarad.sdr101.blocks.Mixer(
+                basQ, loQ);
 
         Summer summer = new Summer(mI, mQ);
         FirFilter lpf = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
@@ -86,11 +92,11 @@ public class Sdr101cli {
                 byte low = (byte) (nSample & 0xFF);
                 dataAfSpeaker[j + 0] = high;
                 dataAfSpeaker[j + 1] = low;
-                //d = ();
-                //d = 0.0;
-                //nSample = (int) Math.round(d * 32766.0);
-                //high = (byte) ((nSample >> 8) & 0xFF);
-                //low = (byte) (nSample & 0xFF);
+                // d = ();
+                // d = 0.0;
+                // nSample = (int) Math.round(d * 32766.0);
+                // high = (byte) ((nSample >> 8) & 0xFF);
+                // low = (byte) (nSample & 0xFF);
                 dataAfSpeaker[j + 2] = high;
                 dataAfSpeaker[j + 3] = low;
             }
@@ -98,30 +104,19 @@ public class Sdr101cli {
         }
 
         /*
-           System.out.println("SDR101-Java");
-           System.out.println();
-
-           BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-
-           while (true) {
-           System.out.print("> ");
-           System.out.flush();
-           String input = inputReader.readLine().trim();
-
-           if (input.equals("+")) {
-        // Increase LO
-        } else if (input.equals("-")) {
-        // Decrease LO
-        } else if (input.equals("++")) {
-        // Increase LO
-        } else if (input.equals("--")) {
-        // Decrease LO
-        } else if (input.equals("")) {
-        // Print status
-        } else if (input.equals("q")) {
-        System.exit(0);
-        }
-           }
-           */
+         * System.out.println("SDR101-Java"); System.out.println();
+         * 
+         * BufferedReader inputReader = new BufferedReader(new
+         * InputStreamReader(System.in));
+         * 
+         * while (true) { System.out.print("> "); System.out.flush(); String
+         * input = inputReader.readLine().trim();
+         * 
+         * if (input.equals("+")) { // Increase LO } else if (input.equals("-"))
+         * { // Decrease LO } else if (input.equals("++")) { // Increase LO }
+         * else if (input.equals("--")) { // Decrease LO } else if
+         * (input.equals("")) { // Print status } else if (input.equals("q")) {
+         * System.exit(0); } }
+         */
     }
 }

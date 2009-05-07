@@ -7,12 +7,12 @@
 
 package org.picofarad.sdr101.blocks;
 
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class FilterFactoryTest {
     @Test
@@ -27,8 +27,10 @@ public class FilterFactoryTest {
     }
 
     @Test
-    public void testLoadCoefficientsFromFileScientificNotation() throws IOException {
-        List<Double> c = FilterFactory.loadCoefficientsFromFile("/firTestScientific.txt");
+    public void testLoadCoefficientsFromFileScientificNotation()
+            throws IOException {
+        List<Double> c = FilterFactory
+                .loadCoefficientsFromFile("/firTestScientific.txt");
         Assert.assertNotNull(c);
         Assert.assertEquals(5, c.size());
         Assert.assertEquals(1.0, c.get(0), 0.0001);

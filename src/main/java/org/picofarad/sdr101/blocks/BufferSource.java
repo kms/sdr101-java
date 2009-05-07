@@ -7,8 +7,8 @@
 
 package org.picofarad.sdr101.blocks;
 
-import java.util.Deque;
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class BufferSource implements SignalBlock {
     private Deque<Double> buffer;

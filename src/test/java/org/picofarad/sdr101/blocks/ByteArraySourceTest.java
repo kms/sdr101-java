@@ -7,12 +7,12 @@
 
 package org.picofarad.sdr101.blocks;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class ByteArraySourceTest {
     @Test
-    public void testOutput() { 
+    public void testOutput() {
         byte[] b = new byte[4];
         ByteArraySource bas = new ByteArraySource(b, 0, 1);
 
@@ -35,7 +35,7 @@ public class ByteArraySourceTest {
     }
 
     @Test
-    public void testSetIndexes() { 
+    public void testSetIndexes() {
         byte[] b = new byte[4];
         ByteArraySource bas = new ByteArraySource(b, 0, 1);
 

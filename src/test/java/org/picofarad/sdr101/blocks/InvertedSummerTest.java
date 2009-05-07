@@ -7,12 +7,12 @@
 
 package org.picofarad.sdr101.blocks;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class InvertedSummerTest {
     @Test
-    public void testInvertedSummer() { 
+    public void testInvertedSummer() {
         BufferSource a = new BufferSource();
         BufferSource b = new BufferSource();
 

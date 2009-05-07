@@ -7,9 +7,9 @@
 
 package org.picofarad.sdr101.blocks;
 
-import java.util.List;
-import java.util.Deque;
 import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.List;
 
 public class FirFilter implements SignalBlock {
     private Double[] coefficients;

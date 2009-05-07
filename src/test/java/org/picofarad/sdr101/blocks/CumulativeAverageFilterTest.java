@@ -7,8 +7,8 @@
 
 package org.picofarad.sdr101.blocks;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class CumulativeAverageFilterTest {
     @Test

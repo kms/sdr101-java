@@ -30,7 +30,7 @@ public class SineSource implements SignalBlock {
 
     public void setFrequency(double f) {
         newFrequency = f;
-    } 
+    }
 
     public double output() {
         double r;

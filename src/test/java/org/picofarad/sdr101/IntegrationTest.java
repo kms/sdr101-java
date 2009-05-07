@@ -7,17 +7,16 @@
 
 package org.picofarad.sdr101;
 
-import org.junit.Test;
 import org.junit.Assert;
-
+import org.junit.Test;
 import org.picofarad.sdr101.blocks.FilterFactory;
 import org.picofarad.sdr101.blocks.FirFilter;
-import org.picofarad.sdr101.blocks.SineSource;
-import org.picofarad.sdr101.blocks.Splitter;
-import org.picofarad.sdr101.blocks.SignalBlock;
-import org.picofarad.sdr101.blocks.Summer;
 import org.picofarad.sdr101.blocks.InvertedSummer;
 import org.picofarad.sdr101.blocks.Mixer;
+import org.picofarad.sdr101.blocks.SignalBlock;
+import org.picofarad.sdr101.blocks.SineSource;
+import org.picofarad.sdr101.blocks.Splitter;
+import org.picofarad.sdr101.blocks.Summer;
 
 public class IntegrationTest {
     @Test
@@ -110,7 +109,7 @@ public class IntegrationTest {
 
         for (int j = 0; j < fs * 2; j++) {
             Assert.assertEquals(desired.output(), ff.output(), 0.05);
-            //System.out.println(desired.output() + ", " + ff.output());
+            // System.out.println(desired.output() + ", " + ff.output());
         }
     }
 

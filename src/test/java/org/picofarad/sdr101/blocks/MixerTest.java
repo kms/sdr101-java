@@ -7,12 +7,12 @@
 
 package org.picofarad.sdr101.blocks;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class MixerTest {
     @Test
-    public void testMixer() { 
+    public void testMixer() {
         BufferSource a = new BufferSource();
         BufferSource b = new BufferSource();
 

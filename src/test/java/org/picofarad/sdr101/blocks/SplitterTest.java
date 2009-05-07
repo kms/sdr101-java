@@ -7,12 +7,12 @@
 
 package org.picofarad.sdr101.blocks;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class SplitterTest {
     @Test
-    public void testOneWaySplitter() { 
+    public void testOneWaySplitter() {
         BufferSource bs = new BufferSource();
         bs.buffer(1.0);
         bs.buffer(0.5);
@@ -27,7 +27,7 @@ public class SplitterTest {
     }
 
     @Test
-    public void testTwoWaySplitter() { 
+    public void testTwoWaySplitter() {
         BufferSource bs = new BufferSource();
         bs.buffer(1.0);
         bs.buffer(0.5);
@@ -48,7 +48,7 @@ public class SplitterTest {
     }
 
     @Test
-    public void testSplitterWithUnorderedAccess() { 
+    public void testSplitterWithUnorderedAccess() {
         BufferSource bs = new BufferSource();
         bs.buffer(1.0);
         bs.buffer(0.5);
@@ -74,7 +74,7 @@ public class SplitterTest {
     }
 
     @Test
-    public void testCascadedSplitters() { 
+    public void testCascadedSplitters() {
         BufferSource bs = new BufferSource();
         bs.buffer(1.0);
         bs.buffer(0.5);

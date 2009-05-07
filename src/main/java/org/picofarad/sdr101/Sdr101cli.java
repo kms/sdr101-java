@@ -8,23 +8,16 @@
 package org.picofarad.sdr101;
 
 import org.picofarad.sdr101.blocks.SineSource;
-import org.picofarad.sdr101.blocks.NullSource;
 import org.picofarad.sdr101.blocks.Summer;
-import org.picofarad.sdr101.blocks.InvertedSummer;
 import org.picofarad.sdr101.blocks.ByteArraySource;
 import org.picofarad.sdr101.blocks.FirFilter;
 import org.picofarad.sdr101.blocks.FilterFactory;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.ByteArrayOutputStream;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.Mixer.Info;
 import javax.sound.sampled.Mixer;
-import javax.sound.sampled.Line;
 
 public class Sdr101cli {
     public static void main(String args[]) throws Exception {
@@ -61,7 +54,6 @@ public class Sdr101cli {
         lineSdrRx.open(formatSdrRx);
         lineAfSpeaker.open(formatAfSpeaker);
 
-        int numBytesRead;
         int bufferSize = 400;
         byte[] dataSdrRx= new byte[bufferSize];
         byte[] dataAfSpeaker = new byte[bufferSize];
@@ -83,7 +75,6 @@ public class Sdr101cli {
         lpf.setInput(summer);
 
         while (true) {
-            numBytesRead = lineSdrRx.read(dataSdrRx, 0, bufferSize);
             for (int j = 0; j < bufferSize; j += 4) {
                 basI.setHighIndex(j);
                 basI.setLowIndex(j + 1);

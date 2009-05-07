@@ -16,7 +16,7 @@ import org.junit.Assert;
 public class FirFilterTest {
     @Test
     public void testTaps() {
-        List<Double> c = new ArrayList();
+        List<Double> c = new ArrayList<Double>();
         c.add(0.0);
         c.add(1.0);
 
@@ -30,7 +30,7 @@ public class FirFilterTest {
 
     @Test
     public void testOut() {
-        List<Double> c = new ArrayList();
+        List<Double> c = new ArrayList<Double>();
         c.add(0.0);
         c.add(1.0);
 

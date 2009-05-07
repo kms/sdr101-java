@@ -85,7 +85,6 @@ public class SplitterTest {
         SplitterOutput oA2 = sA.createOutput();
 
         Splitter sB = new Splitter(oA1);
-        SplitterOutput oB1 = sB.createOutput();
         SplitterOutput oB2 = sB.createOutput();
 
         Assert.assertEquals(1.0, oB2.output(), 0.0001);

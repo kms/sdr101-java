@@ -8,8 +8,6 @@
 package org.picofarad.sdr101.blocks;
 
 import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Deque;
 import java.util.ArrayDeque;
 

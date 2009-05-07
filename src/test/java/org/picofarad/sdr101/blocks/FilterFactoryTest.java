@@ -41,7 +41,7 @@ public class FilterFactoryTest {
     @Test
     public void testLoadFirFromFileBadData() {
         try {
-            FirFilter sb = FilterFactory.loadFirFromFile("/firTestBadData.txt");
+            FilterFactory.loadFirFromFile("/firTestBadData.txt");
             Assert.fail("Did not throw exception.");
         } catch (IOException e) {
         }
@@ -50,7 +50,7 @@ public class FilterFactoryTest {
     @Test
     public void testLoadFirFromFileBadFilename() throws IOException {
         try {
-            SignalBlock sb = FilterFactory.loadFirFromFile("/thisFileDoesNotExist.txt");
+            FilterFactory.loadFirFromFile("/thisFileDoesNotExist.txt");
             Assert.fail("Did not throw exception.");
         } catch (FileNotFoundException e) {
         }

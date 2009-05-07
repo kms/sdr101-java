@@ -7,9 +7,6 @@
 
 package org.picofarad.sdr101.blocks;
 
-import java.util.Deque;
-import java.util.ArrayDeque;
-
 public class ByteArraySource implements SignalBlock {
     byte[] input;
     int highIndex;

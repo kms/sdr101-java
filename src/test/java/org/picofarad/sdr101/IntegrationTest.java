@@ -22,7 +22,7 @@ public class IntegrationTest {
     @Test
     public void testHPFilterStopBand() throws Exception {
         int fs = 44100;
-        FirFilter ff = FilterFactory.loadFirFromFile("/firHP300HzAt44100.txt");
+        FirFilter ff = FilterFactory.loadFirFromFile("/firHP300HzAt44100-51taps.txt");
         ff.setInput(new SineSource(fs, 1));
 
         for (int i = 0; i < fs * 2; i++) {
@@ -37,7 +37,7 @@ public class IntegrationTest {
         Splitter s = new Splitter(sineSource);
         SignalBlock sinePristine = s.createOutput();
 
-        FirFilter ff = FilterFactory.loadFirFromFile("/firHP300HzAt44100.txt");
+        FirFilter ff = FilterFactory.loadFirFromFile("/firHP300HzAt44100-51taps.txt");
         ff.setInput(s.createOutput());
 
         for (int i = 0; i < ff.taps(); i++) {
@@ -57,7 +57,7 @@ public class IntegrationTest {
     @Test
     public void testLPFilterStopBand() throws Exception {
         int fs = 44100;
-        FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
+        FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100-101taps.txt");
         ff.setInput(new SineSource(fs, 20000));
 
         for (int i = 0; i < fs * 2; i++) {
@@ -72,7 +72,7 @@ public class IntegrationTest {
         Splitter s = new Splitter(sineSource);
         SignalBlock sinePristine = s.createOutput();
 
-        FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
+        FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100-101taps.txt");
         ff.setInput(s.createOutput());
 
         for (int i = 0; i < ff.taps(); i++) {
@@ -95,7 +95,7 @@ public class IntegrationTest {
         SineSource sine = new SineSource(fs, 3000, 0);
         SineSource desired = new SineSource(fs, 3000, -90);
 
-        FirFilter ff = FilterFactory.loadFirFromFile("/firHilbert.txt");
+        FirFilter ff = FilterFactory.loadFirFromFile("/firHilbert-31taps.txt");
         ff.setInput(sine);
 
         for (int i = 0; i < ff.taps(); i++) {
@@ -108,7 +108,7 @@ public class IntegrationTest {
         }
 
         for (int j = 0; j < fs * 2; j++) {
-            Assert.assertEquals(desired.output(), ff.output(), 0.05);
+            Assert.assertEquals(desired.output(), ff.output(), 0.01);
             // System.out.println(desired.output() + ", " + ff.output());
         }
     }
@@ -179,7 +179,7 @@ public class IntegrationTest {
         Mixer mI = new Mixer(i, loI);
         Mixer mQ = new Mixer(q, loQ);
         Summer s = new Summer(mI, mQ);
-        FirFilter lpf = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
+        FirFilter lpf = FilterFactory.loadFirFromFile("/firLP3kHzAt44100-101taps.txt");
         lpf.setInput(s);
 
         for (int j = 0; j < lpf.taps(); j++) {

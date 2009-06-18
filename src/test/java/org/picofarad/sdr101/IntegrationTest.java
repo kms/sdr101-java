@@ -7,6 +7,8 @@
 
 package org.picofarad.sdr101;
 
+import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.picofarad.sdr101.blocks.FilterFactory;
@@ -16,6 +18,7 @@ import org.picofarad.sdr101.blocks.Mixer;
 import org.picofarad.sdr101.blocks.SignalBlock;
 import org.picofarad.sdr101.blocks.SineSource;
 import org.picofarad.sdr101.blocks.Splitter;
+import org.picofarad.sdr101.blocks.SplitterOutput;
 import org.picofarad.sdr101.blocks.Summer;
 
 public class IntegrationTest {
@@ -109,7 +112,6 @@ public class IntegrationTest {
 
         for (int j = 0; j < fs * 2; j++) {
             Assert.assertEquals(desired.output(), ff.output(), 0.01);
-            // System.out.println(desired.output() + ", " + ff.output());
         }
     }
 
@@ -167,6 +169,33 @@ public class IntegrationTest {
         }
     }
 
+    @Test
+    public void testGenerateTwoToneUSB() throws IOException {
+        int fs = 44100;
+        SineSource afAI = new SineSource(fs, 100, 0);
+        SineSource afBI = new SineSource(fs, 300, 0);
+        Summer afI = new Summer(afAI, afBI);
+        
+        SineSource afAQ = new SineSource(fs, 100, 90);
+        SineSource afBQ = new SineSource(fs, 300, 90);
+        Summer afQ = new Summer(afAQ, afBQ);
+                
+        SineSource loI = new SineSource(fs, 1000, 0);
+        SineSource loQ = new SineSource(fs, 1000, 90);
+
+        SineSource desiredA = new SineSource(fs, 1100, 0);
+        SineSource desiredB = new SineSource(fs, 1300, 0);
+        Summer desired = new Summer(desiredA, desiredB);
+        
+        Mixer mI = new Mixer(afI, loQ);
+        Mixer mQ = new Mixer(afQ, loI);
+        Summer s = new Summer(mI, mQ);
+
+        for (int j = 0; j < 200; j++) {
+           Assert.assertEquals(desired.output(), s.output(), 0.0001);
+        }
+    }
+    
     @Test
     public void testDemodulateUSB() throws Exception {
         int fs = 44100;

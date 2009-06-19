@@ -18,7 +18,6 @@ import org.picofarad.sdr101.blocks.Mixer;
 import org.picofarad.sdr101.blocks.SignalBlock;
 import org.picofarad.sdr101.blocks.SineSource;
 import org.picofarad.sdr101.blocks.Splitter;
-import org.picofarad.sdr101.blocks.SplitterOutput;
 import org.picofarad.sdr101.blocks.Summer;
 
 public class IntegrationTest {
@@ -28,7 +27,7 @@ public class IntegrationTest {
         FirFilter ff = FilterFactory.loadFirFromFile("/firHP300HzAt44100-51taps.txt");
         ff.setInput(new SineSource(fs, 1));
 
-        for (int i = 0; i < fs * 2; i++) {
+        for (int i = 0; i < (fs * 2); i++) {
             Assert.assertEquals(0.0, ff.output(), 0.5);
         }
     }
@@ -52,7 +51,7 @@ public class IntegrationTest {
             ff.output();
         }
 
-        for (int i = 0; i < fs * 2; i++) {
+        for (int i = 0; i < (fs * 2); i++) {
             Assert.assertEquals(sinePristine.output(), ff.output(), 0.05);
         }
     }
@@ -63,7 +62,7 @@ public class IntegrationTest {
         FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100-101taps.txt");
         ff.setInput(new SineSource(fs, 20000));
 
-        for (int i = 0; i < fs * 2; i++) {
+        for (int i = 0; i < (fs * 2); i++) {
             Assert.assertEquals(0.0, ff.output(), 0.01);
         }
     }
@@ -87,7 +86,7 @@ public class IntegrationTest {
             ff.output();
         }
 
-        for (int i = 0; i < fs * 2; i++) {
+        for (int i = 0; i < (fs * 2); i++) {
             Assert.assertEquals(sinePristine.output(), ff.output(), 0.05);
         }
     }
@@ -128,7 +127,7 @@ public class IntegrationTest {
         Mixer mQ = new Mixer(q, loQ);
         Summer s = new InvertedSummer(mI, mQ);
 
-        for (int j = 0; j < fs * 2; j++) {
+        for (int j = 0; j < (fs * 2); j++) {
             Assert.assertEquals(desired.output(), s.output(), 0.0001);
         }
     }
@@ -146,7 +145,7 @@ public class IntegrationTest {
         Mixer mQ = new Mixer(q, loI);
         Summer s = new Summer(mI, mQ);
 
-        for (int j = 0; j < fs * 2; j++) {
+        for (int j = 0; j < (fs * 2); j++) {
             Assert.assertEquals(desired.output(), s.output(), 0.0001);
         }
     }
@@ -164,7 +163,7 @@ public class IntegrationTest {
         Mixer mQ = new Mixer(q, loQ);
         Summer s = new Summer(mI, mQ);
 
-        for (int j = 0; j < fs * 2; j++) {
+        for (int j = 0; j < (fs * 2); j++) {
             Assert.assertEquals(desired.output(), s.output(), 0.0001);
         }
     }
@@ -191,7 +190,7 @@ public class IntegrationTest {
         Mixer mQ = new Mixer(afQ, loI);
         Summer s = new Summer(mI, mQ);
 
-        for (int j = 0; j < 200; j++) {
+        for (int j = 0; j < (fs * 2); j++) {
            Assert.assertEquals(desired.output(), s.output(), 0.0001);
         }
     }
@@ -199,10 +198,10 @@ public class IntegrationTest {
     @Test
     public void testDemodulateUSB() throws Exception {
         int fs = 44100;
-        SineSource i = new SineSource(fs, 1100, 0);
-        SineSource q = new SineSource(fs, 1100, 90);
-        SineSource loI = new SineSource(fs, 1000, 0);
-        SineSource loQ = new SineSource(fs, 1000, 90);
+        SineSource i = new SineSource(fs, 15100, 0);
+        SineSource q = new SineSource(fs, 15100, 90);
+        SineSource loI = new SineSource(fs, 15000, 0);
+        SineSource loQ = new SineSource(fs, 15000, 90);
         SineSource desired = new SineSource(fs, 100, 90);
 
         Mixer mI = new Mixer(i, loI);
@@ -220,7 +219,45 @@ public class IntegrationTest {
             lpf.output();
         }
 
-        for (int j = 0; j < fs * 2; j++) {
+        for (int j = 0; j < (fs * 2); j++) {
+            Assert.assertEquals(desired.output(), lpf.output(), 0.01);
+        }
+    }
+
+    @Test
+    public void testDemodulateTwoToneUSB() throws Exception {
+        int fs = 44100;
+        SineSource rfAI = new SineSource(fs, 15100, 0);
+        SineSource rfBI = new SineSource(fs, 16000, 0);
+        Summer rfI = new Summer(rfAI, rfBI);
+        
+        SineSource rfAQ = new SineSource(fs, 15100, 90);
+        SineSource rfBQ = new SineSource(fs, 16000, 90);
+        Summer rfQ = new Summer(rfAQ, rfBQ);
+                
+        SineSource loI = new SineSource(fs, 15000, 0);
+        SineSource loQ = new SineSource(fs, 15000, 90);
+
+        SineSource desiredA = new SineSource(fs, 100, 0);
+        SineSource desiredB = new SineSource(fs, 1000, 0);
+        Summer desired = new Summer(desiredA, desiredB);
+                
+        Mixer mI = new Mixer(rfI, loI);
+        Mixer mQ = new Mixer(rfQ, loQ);
+        Summer s = new Summer(mI, mQ);
+        FirFilter lpf = FilterFactory.loadFirFromFile("/firLP3kHzAt44100-101taps.txt");
+        lpf.setInput(s);
+
+        for (int j = 0; j < lpf.taps(); j++) {
+            desired.output();
+            lpf.output();
+        }
+
+        for (int j = 0; j < lpf.taps() / 2; j++) {
+            lpf.output();
+        }
+
+        for (int j = 0; j < (fs * 2); j++) {
             Assert.assertEquals(desired.output(), lpf.output(), 0.01);
         }
     }

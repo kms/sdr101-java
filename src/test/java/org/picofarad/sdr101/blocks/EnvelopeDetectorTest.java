@@ -8,6 +8,7 @@
 package org.picofarad.sdr101.blocks;
 
 import org.junit.Test;
+import org.picofarad.sdr101.blocks.sources.SineSource;
 
 public class EnvelopeDetectorTest {
     @Test

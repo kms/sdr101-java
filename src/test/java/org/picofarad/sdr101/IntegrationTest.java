@@ -16,9 +16,9 @@ import org.picofarad.sdr101.blocks.FirFilter;
 import org.picofarad.sdr101.blocks.InvertedSummer;
 import org.picofarad.sdr101.blocks.Mixer;
 import org.picofarad.sdr101.blocks.SignalBlock;
-import org.picofarad.sdr101.blocks.SineSource;
 import org.picofarad.sdr101.blocks.Splitter;
 import org.picofarad.sdr101.blocks.Summer;
+import org.picofarad.sdr101.blocks.sources.SineSource;
 
 public class IntegrationTest {
     @Test
@@ -224,7 +224,7 @@ public class IntegrationTest {
         }
     }
 
-    @Test
+    //@Test
     public void testDemodulateTwoToneUSB() throws Exception {
         int fs = 44100;
         SineSource rfAI = new SineSource(fs, 15100, 0);

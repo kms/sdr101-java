@@ -11,6 +11,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
+import org.picofarad.sdr101.blocks.sources.NullSource;
+
 public class FirFilter implements SignalBlock {
     private Double[] coefficients;
     private Deque<Double> buffer;

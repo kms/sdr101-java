@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.picofarad.sdr101.blocks.sources.ImpulseSource;
 
 public class FilterFactoryTest {
     @Test

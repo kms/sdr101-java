@@ -21,7 +21,7 @@ public class Splitter {
         outputs = new HashMap<SplitterOutput, Deque<Double>>();
     }
 
-    public SplitterOutput createOutput() {
+	public SplitterOutput createOutput() {
         SplitterOutput so = new SplitterOutput(this);
         outputs.put(so, new ArrayDeque<Double>());
 

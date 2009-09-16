@@ -5,10 +5,12 @@
  * Licensed under the GNU GPL 2.0 or later.
  */
 
-package org.picofarad.sdr101.blocks;
+package org.picofarad.sdr101.blocks.sources;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import org.picofarad.sdr101.blocks.SignalBlock;
 
 public class BufferSource implements SignalBlock {
     private Deque<Double> buffer;

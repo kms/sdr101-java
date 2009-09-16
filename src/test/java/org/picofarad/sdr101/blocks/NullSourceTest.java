@@ -9,6 +9,7 @@ package org.picofarad.sdr101.blocks;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.picofarad.sdr101.blocks.sources.NullSource;
 
 public class NullSourceTest {
     @Test

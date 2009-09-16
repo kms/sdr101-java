@@ -15,11 +15,11 @@ import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.Mixer.Info;
 
-import org.picofarad.sdr101.blocks.ByteArraySource;
 import org.picofarad.sdr101.blocks.FilterFactory;
 import org.picofarad.sdr101.blocks.FirFilter;
-import org.picofarad.sdr101.blocks.SineSource;
 import org.picofarad.sdr101.blocks.Summer;
+import org.picofarad.sdr101.blocks.sources.ByteArraySource;
+import org.picofarad.sdr101.blocks.sources.SineSource;
 
 public class Sdr101cli {
     public static void main(String args[]) throws Exception {

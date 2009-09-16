@@ -10,10 +10,10 @@ package org.picofarad.sdr101;
 import org.picofarad.sdr101.blocks.FilterFactory;
 import org.picofarad.sdr101.blocks.FirFilter;
 import org.picofarad.sdr101.blocks.Mixer;
-import org.picofarad.sdr101.blocks.SineSource;
 import org.picofarad.sdr101.blocks.Splitter;
 import org.picofarad.sdr101.blocks.SplitterOutput;
 import org.picofarad.sdr101.blocks.Summer;
+import org.picofarad.sdr101.blocks.sources.SineSource;
 
 public class Sdr101performance {
     public static void main(String args[]) throws Exception {

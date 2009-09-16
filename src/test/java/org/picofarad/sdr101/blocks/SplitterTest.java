@@ -15,9 +15,9 @@ public class SplitterTest {
     @Test
     public void testOneWaySplitter() {
         BufferSource bs = new BufferSource();
-        bs.buffer(1.0);
-        bs.buffer(0.5);
-        bs.buffer(0.25);
+        bs.add(1.0);
+        bs.add(0.5);
+        bs.add(0.25);
 
         Splitter s = new Splitter(bs);
         SplitterOutput o1 = s.createOutput();
@@ -30,9 +30,9 @@ public class SplitterTest {
     @Test
     public void testTwoWaySplitter() {
         BufferSource bs = new BufferSource();
-        bs.buffer(1.0);
-        bs.buffer(0.5);
-        bs.buffer(0.25);
+        bs.add(1.0);
+        bs.add(0.5);
+        bs.add(0.25);
 
         Splitter s = new Splitter(bs);
         SplitterOutput o1 = s.createOutput();
@@ -51,9 +51,9 @@ public class SplitterTest {
     @Test
     public void testSplitterWithUnorderedAccess() {
         BufferSource bs = new BufferSource();
-        bs.buffer(1.0);
-        bs.buffer(0.5);
-        bs.buffer(0.25);
+        bs.add(1.0);
+        bs.add(0.5);
+        bs.add(0.25);
 
         Splitter s = new Splitter(bs);
         SplitterOutput o1 = s.createOutput();
@@ -77,9 +77,9 @@ public class SplitterTest {
     @Test
     public void testCascadedSplitters() {
         BufferSource bs = new BufferSource();
-        bs.buffer(1.0);
-        bs.buffer(0.5);
-        bs.buffer(0.25);
+        bs.add(1.0);
+        bs.add(0.5);
+        bs.add(0.25);
 
         Splitter sA = new Splitter(bs);
         SplitterOutput oA1 = sA.createOutput();

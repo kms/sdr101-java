@@ -25,10 +25,10 @@ public class BufferSourceTest {
     public void testBufferSourceWithData() {
         BufferSource bs = new BufferSource();
 
-        bs.buffer(1.0);
-        bs.buffer(0.5);
-        bs.buffer(0.0);
-        bs.buffer(0.6);
+        bs.add(1.0);
+        bs.add(0.5);
+        bs.add(0.0);
+        bs.add(0.6);
 
         Assert.assertEquals(1.0, bs.output(), 0.0001);
         Assert.assertEquals(0.5, bs.output(), 0.0001);
@@ -40,8 +40,8 @@ public class BufferSourceTest {
     public void testBufferSourceGoingEmpty() {
         BufferSource bs = new BufferSource();
 
-        bs.buffer(1.0);
-        bs.buffer(0.5);
+        bs.add(1.0);
+        bs.add(0.5);
 
         Assert.assertEquals(1.0, bs.output(), 0.0001);
         Assert.assertEquals(0.5, bs.output(), 0.0001);

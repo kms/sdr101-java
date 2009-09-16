@@ -16,11 +16,11 @@ public class FullWaveRectifierTest {
     public void testFullWaveRectifier() {
         BufferSource bs = new BufferSource();
 
-        bs.buffer(0.0);
-        bs.buffer(1.0);
-        bs.buffer(0.25);
-        bs.buffer(-1.0);
-        bs.buffer(-0.75);
+        bs.add(0.0);
+        bs.add(1.0);
+        bs.add(0.25);
+        bs.add(-1.0);
+        bs.add(-0.75);
 
         FullWaveRectifier fwr = new FullWaveRectifier(bs);
 

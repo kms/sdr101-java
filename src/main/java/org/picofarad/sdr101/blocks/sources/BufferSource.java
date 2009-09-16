@@ -19,7 +19,7 @@ public class BufferSource implements SignalBlock {
         buffer = new ArrayDeque<Double>();
     }
 
-    public void buffer(double d) {
+    public void add(double d) {
         buffer.offer(d);
     }
 

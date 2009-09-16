@@ -18,27 +18,38 @@ import java.util.List;
 public abstract class FilterFactory {
     protected static List<Double> loadCoefficientsFromFile(String f)
             throws IOException, FileNotFoundException {
-        InputStream is = FilterFactory.class.getResourceAsStream(f);
-        if (is == null) {
-            throw new FileNotFoundException();
-        }
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader br = new BufferedReader(isr);
+        BufferedReader br = openFile(f);
 
         List<Double> coefficients = new ArrayList<Double>();
 
         String line;
         while ((line = br.readLine()) != null) {
-            try {
-                double d = Double.valueOf(line.trim());
-                coefficients.add(d);
-            } catch (NumberFormatException e) {
-                throw new IOException(e);
-            }
+            processLine(coefficients, line);
         }
 
         return coefficients;
     }
+
+	private static void processLine(List<Double> coefficients, String line)
+			throws IOException {
+		try {
+		    double d = Double.valueOf(line.trim());
+		    coefficients.add(d);
+		} catch (NumberFormatException e) {
+		    throw new IOException(e);
+		}
+	}
+
+	private static BufferedReader openFile(String f)
+			throws FileNotFoundException {
+		InputStream is = FilterFactory.class.getResourceAsStream(f);
+        if (is == null) {
+            throw new FileNotFoundException();
+        }
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+		return br;
+	}
 
     public static FirFilter loadFirFromFile(String f) throws IOException {
         List<Double> c = loadCoefficientsFromFile(f);

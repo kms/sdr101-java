@@ -17,18 +17,18 @@ public class CumulativeAverageFilterTest {
     public void testCumulativeAverageFilterSimple() {
         BufferSource bs = new BufferSource();
 
-        bs.buffer(0.0);
-        bs.buffer(1.0);
-        bs.buffer(0.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
-        bs.buffer(1.0);
+        bs.add(0.0);
+        bs.add(1.0);
+        bs.add(0.0);
+        bs.add(1.0);
+        bs.add(1.0);
+        bs.add(1.0);
+        bs.add(1.0);
+        bs.add(1.0);
+        bs.add(1.0);
+        bs.add(1.0);
+        bs.add(1.0);
+        bs.add(1.0);
 
         CumulativeAverageFilter maf = new CumulativeAverageFilter(bs, 2);
 

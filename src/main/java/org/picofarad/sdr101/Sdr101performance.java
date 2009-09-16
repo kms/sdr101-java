@@ -25,7 +25,7 @@ public class Sdr101performance {
         Mixer mI = new Mixer(i, loI);
         Mixer mQ = new Mixer(q, loQ);
         Summer s = new Summer(mI, mQ);
-        FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100.txt");
+        FirFilter ff = FilterFactory.loadFirFromFile("/firLP3kHzAt44100-101taps.txt");
         ff.setInput(s);
         Splitter spl = new Splitter(ff);
         SplitterOutput so = spl.createOutput();

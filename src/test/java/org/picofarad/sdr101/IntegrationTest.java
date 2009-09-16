@@ -125,7 +125,7 @@ public class IntegrationTest {
 
         Mixer mI = new Mixer(i, loI);
         Mixer mQ = new Mixer(q, loQ);
-        Summer s = new InvertedSummer(mI, mQ);
+        InvertedSummer s = new InvertedSummer(mI, mQ);
 
         for (int j = 0; j < (fs * 2); j++) {
             Assert.assertEquals(desired.output(), s.output(), 0.0001);

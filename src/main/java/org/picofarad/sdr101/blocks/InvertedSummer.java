@@ -7,12 +7,15 @@
 
 package org.picofarad.sdr101.blocks;
 
-public class InvertedSummer extends Summer {
+public class InvertedSummer implements SignalBlock {
+	private SignalBlock inputA;
+	private SignalBlock inputB;
+	
     public InvertedSummer(SignalBlock a, SignalBlock b) {
-        super(a, b);
+        inputA = a;
+        inputB = b;
     }
 
-    @Override
     public double output() {
         return inputA.output() - inputB.output();
     }
